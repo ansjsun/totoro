@@ -1,6 +1,5 @@
 package org.ansj.util;
 
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class MyStaticValue {
