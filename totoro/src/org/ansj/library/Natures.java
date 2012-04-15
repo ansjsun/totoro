@@ -4,13 +4,15 @@ import java.util.Arrays;
 
 public final class Natures {
 
-	public int[] natures = null;;
+	public Nature[] natures = null;
 
 	public Natures(String str) {
 		String[] natruesStr = str.split(",");
-		natures = new int[natruesStr.length];
+		String[] strs = null ;
+		natures = new Nature[natruesStr.length];
 		for (int i = 0; i < natruesStr.length; i++) {
-			natures[i] = getNatureIndex(natruesStr[i].trim());
+			strs = natruesStr[i].split(":") ;
+			natures[i] = new Nature(NatureEnum.valueOf(strs[0]),Integer.parseInt(strs[1])) ;
 		}
 	}
 
