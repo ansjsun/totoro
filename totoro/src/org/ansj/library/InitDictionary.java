@@ -1,6 +1,9 @@
 package org.ansj.library;
 
 import java.io.BufferedReader;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.util.HashMap;
 
 import org.ansj.util.IOUtil;
 import org.ansj.util.MyStaticValue;
@@ -36,17 +39,26 @@ public class InitDictionary {
 	 */
 	public static String[] natures = new String[ARRAYLENGTH];
 	/**
+	 * 
+	 */
+	public static HashMap<Character,Integer> nameMap = new HashMap<Character,Integer>() ;
+	
+	/**
 	 * arraysPath: base编码的硬盘位置
 	 */
 	public static String arraysPath = "library/arrays.dic";
 	/**
-	 * arraysPath: base编码的硬盘位置
+	 * arraysNumberPath: 数字词典硬盘位置
 	 */
 	public static String arraysNumberPath = MyStaticValue.rb.getString("number");
 	/**
-	 * arraysPath: base编码的硬盘位置
+	 * arraysEnglishPath: 英语词典的硬盘位置
 	 */
 	public static String arraysEnglishPath = MyStaticValue.rb.getString("english");
+	/**
+	 * arrayNamePath: 姓名词典的硬盘位置
+	 */
+	public static String arraysNamePath = MyStaticValue.rb.getString("familyName") ;
 	
 	/**
 	 * arraysStopPath: 标点符号截断词词典
@@ -106,6 +118,22 @@ public class InitDictionary {
 				natures[num] = strs[5] ;
 				weights[num] = Integer.parseInt(strs[6]) ;
 			}
+		}
+		reader.close() ;
+	}
+	
+	
+	/**
+	 * 加载姓名词典
+	 * @throws UnsupportedEncodingException 
+	 */
+	public static void initNameLibrary() throws Exception{
+		BufferedReader reader = IOUtil.getReader(arraysNamePath, "UTF-8") ;
+		String temp = null;
+		String[] strs = null ;
+		while ((temp = reader.readLine()) != null) {
+			strs = temp.split("	") ;
+			nameMap.put(strs[0].charAt(0), Integer.parseInt(strs[1])) ;
 		}
 	}
 

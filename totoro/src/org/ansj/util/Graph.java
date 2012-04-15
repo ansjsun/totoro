@@ -1,6 +1,7 @@
 package org.ansj.util;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 
 import org.ansj.domain.Term;
 
@@ -10,13 +11,14 @@ import org.ansj.domain.Term;
  *
  */
 public class Graph {
-	Term[][] terms = null;
-	Term root = null ;
-	Term end = null ;
+	private Term[][] terms = null;
+	private Term end = null ;
+	private Term root = null ;
 
 	public Graph(int size) {
 		terms = new Term[size+1][1];
 		end = new Term("E",size,1,null) ;
+		root = new Term("B",size,1,null) ;
 		addTerm(end) ;
 	}
 	/**
@@ -77,17 +79,22 @@ public class Graph {
 		return sb.toString() ;
 	}
 	
-	
-	public void showTerms(){
-		for (int i = 0; i < terms.length; i++) {
-			for (int j = 0; j < terms[i].length; j++) {
-				if(terms[i][j]!=null)
-				System.out.print(terms[i][j].toString()+terms[i][j].getWeight());
-				System.out.print("	");
-			}
-			System.out.println();
+	/**
+	 * 取得最优路径的root Term
+	 * @return
+	 */
+	public Term optimalRoot(){
+		Term to = end.getMaxFrom() ;
+		Term from = null ;
+		while((from=to.getMaxFrom())!=null){
+			from.setMaxTo(to) ;
+			to = from ;
 		}
+		root.setMaxTo(to) ;
+		return root ;
 	}
+	
+	
 	
 	/**
 	 * 显示路径

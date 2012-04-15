@@ -18,7 +18,7 @@ public class MakeArray {
 	// 当前数组的词
 	public static String words[] = new String[1000000];
 	// nature
-	public static String natures[] = new String[1000000];
+	public static Natures natures[] = new Natures[1000000];
 	// weight
 	public static String weights[] = new String[1000000];
 
@@ -58,12 +58,6 @@ public class MakeArray {
 		reader = IOUtil.getReader(path, charEncoding);
 		reader.close() ;
 		
-		//加载stop标点符号词典
-//		reader = IOUtil.getReader(InitDictionary.arraysStopPath,
-//				charEncoding);
-//		makeASCIIArray(reader);
-//		
-//		reader.close() ;
 		
 		//加载主词典
 		reader = IOUtil.getReader(path, charEncoding);
@@ -93,7 +87,12 @@ public class MakeArray {
 				check[chars[0]] = -1;
 				status[chars[0]] = Integer.parseInt(strs[1]);
 				words[chars[0]] = temp;
-				natures[chars[0]] = strs[2];
+				if(natures[chars[0]]==null){
+					natures[chars[0]] = new Natures().;
+				}else{
+					
+				}
+				
 				weights[chars[0]] = strs[3];
 			} else {
 				int previousCheck = getBaseNum(chars);
@@ -114,7 +113,6 @@ public class MakeArray {
 						status[tempBase] = Integer.parseInt(strs[1]);
 						words[tempBase] = strs[0];
 						natures[tempBase] = strs[2];
-						weights[tempBase] = strs[3];
 					}
 				}
 				previous = previousCheck;

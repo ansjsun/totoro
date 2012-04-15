@@ -2,6 +2,7 @@ package org.ansj.splitWord.impl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 
 import org.ansj.domain.Term;
@@ -46,7 +47,8 @@ public class Test {
 	public static void main(String[] args) throws IOException {
 		String str = null ;
 		long start = System.currentTimeMillis() ;
-		BufferedReader br = IOUtil.getReader("C://Users//ansj//Desktop//新建文本文档.txt", "GBK") ;
+//		BufferedReader br = IOUtil.getReader("C://Users//ansj//Desktop//新建文本文档.txt", "GBK") ;
+		BufferedReader br = new BufferedReader(new StringReader("结婚的和尚未结婚的")) ;
 		while((str=br.readLine())!=null){
 			GetWordsImpl gwi = new GetWordsImpl();
 			gwi.setStr(str);
@@ -56,7 +58,11 @@ public class Test {
 				gp.addTerm(new Term(temp,gwi.offe,gwi.getWeight(),gwi.getNature())) ;
 			}
 			gp.getPath();
-			System.out.println(gp);
+//			System.out.println(gp);
+			Term term = gp.optimalRoot() ;
+			while((term=term.getMaxTo())!=null){
+				System.out.println(term);
+			}
 		}
 		System.out.println(System.currentTimeMillis()-start);
 		

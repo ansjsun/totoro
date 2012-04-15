@@ -7,8 +7,10 @@ public class Term {
 	private String name;
 	// 当前词的起始位置
 	private int offe;
-	// 最优的路径
+	// 最优的来源路径
 	private Term maxFrom;
+	// 最优的去路径
+	private Term maxTo;
 	// 路径权重
 	private float weight = Float.MAX_VALUE;
 	// 词性
@@ -79,6 +81,14 @@ public class Term {
 
 	public void setMaxFrom(Term maxFrom) {
 		this.maxFrom = maxFrom;
+	}
+	
+	public Term getMaxTo() {
+		return maxTo;
+	}
+
+	public void setMaxTo(Term maxTo) {
+		this.maxTo = maxTo;
 	}
 
 	public String getNature() {
