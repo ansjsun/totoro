@@ -29,13 +29,7 @@ public final class Natures {
 	public int getNatureIndex(Nature nature) {
 		return NatureMap.natrueMap.get(nature);
 	}
+	
+	
 
-	public boolean contains(int n) {
-		for (int i = 0; i < natures.length; i++) {
-			if (n == natures[i]) {
-				return true;
-			}
-		}
-		return false;
-	}
 }
