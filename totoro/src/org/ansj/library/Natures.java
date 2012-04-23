@@ -1,19 +1,22 @@
 package org.ansj.library;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class Natures {
 
-	public Nature[] natures = null;
+	public List<Nature> natures = new ArrayList();
+	
+	public Natures(String nature,Integer weight){
+		natures.add(new Nature(NatureEnum.valueOf(nature),weight)) ;
+	}
+	
+	public Natures(){
+	}
 
-	public Natures(String str) {
-		String[] natruesStr = str.split(",");
-		String[] strs = null ;
-		natures = new Nature[natruesStr.length];
-		for (int i = 0; i < natruesStr.length; i++) {
-			strs = natruesStr[i].split(":") ;
-			natures[i] = new Nature(NatureEnum.valueOf(strs[0]),Integer.parseInt(strs[1])) ;
-		}
+	
+	public void add(String nature,Integer weight){
+		natures.add(new Nature(NatureEnum.valueOf(nature),weight)) ;
 	}
 
 	/**

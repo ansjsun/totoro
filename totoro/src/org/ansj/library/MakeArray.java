@@ -88,12 +88,9 @@ public class MakeArray {
 				status[chars[0]] = Integer.parseInt(strs[1]);
 				words[chars[0]] = temp;
 				if(natures[chars[0]]==null){
-					natures[chars[0]] = new Natures().;
-				}else{
-					
+					natures[chars[0]] = new Natures();
 				}
-				
-				weights[chars[0]] = strs[3];
+				natures[chars[0]].add(strs[2], Integer.parseInt(strs[3])) ;
 			} else {
 				int previousCheck = getBaseNum(chars);
 				if (previous == previousCheck) {
@@ -112,7 +109,10 @@ public class MakeArray {
 						check[tempBase] = previous;
 						status[tempBase] = Integer.parseInt(strs[1]);
 						words[tempBase] = strs[0];
-						natures[tempBase] = strs[2];
+						if(natures[chars[0]]==null){
+							natures[chars[0]] = new Natures();
+						}
+						natures[chars[0]].add(strs[2], Integer.parseInt(strs[3])) ;
 					}
 				}
 				previous = previousCheck;
@@ -122,6 +122,9 @@ public class MakeArray {
 			}
 		}
 	}
+	private static final Natures EN =  new Natures("en",1) ;
+	private static final Natures NB =  new Natures("nb",1) ;
+	private static final Natures PO =  new Natures("po",1) ;
 
 	public static void makeASCIIArray(BufferedReader reader) throws IOException {
 		String temp = null;
@@ -138,16 +141,15 @@ public class MakeArray {
 			words[baseValue] = strs[0];
 			switch (sta) {
 			case 4:
-				natures[baseValue] = "en";
+				natures[baseValue] = EN;
 				break;
 			case 5:
-				natures[baseValue] = "nb";
+				natures[baseValue] = NB;
 				break;
 			case -1:
-				natures[baseValue] = "bd";
+				natures[baseValue] = PO;
 				break;
 			}
-			weights[baseValue] = "1";
 		}
 	}
 
