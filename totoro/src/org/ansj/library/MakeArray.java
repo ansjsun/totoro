@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.ansj.domain.Natures;
 import org.ansj.util.IOUtil;
 
 public class MakeArray {
@@ -55,7 +56,6 @@ public class MakeArray {
 		reader = IOUtil.getReader(InitDictionary.arraysEnglishPath,
 				charEncoding);
 		makeASCIIArray(reader);
-		reader = IOUtil.getReader(path, charEncoding);
 		reader.close() ;
 		
 		
@@ -87,10 +87,7 @@ public class MakeArray {
 				check[chars[0]] = -1;
 				status[chars[0]] = Integer.parseInt(strs[1]);
 				words[chars[0]] = temp;
-				if(natures[chars[0]]==null){
-					natures[chars[0]] = new Natures();
-				}
-				natures[chars[0]].add(strs[2], Integer.parseInt(strs[3])) ;
+				natures[chars[0]] = new Natures(strs[2]) ;
 			} else {
 				int previousCheck = getBaseNum(chars);
 				if (previous == previousCheck) {
@@ -109,10 +106,7 @@ public class MakeArray {
 						check[tempBase] = previous;
 						status[tempBase] = Integer.parseInt(strs[1]);
 						words[tempBase] = strs[0];
-						if(natures[chars[0]]==null){
-							natures[chars[0]] = new Natures();
-						}
-						natures[chars[0]].add(strs[2], Integer.parseInt(strs[3])) ;
+						natures[chars[0]] = new Natures(strs[2]) ;
 					}
 				}
 				previous = previousCheck;

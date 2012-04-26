@@ -1,4 +1,6 @@
-package org.ansj.library ;
+package org.ansj.domain ;
+
+import org.ansj.library.NatureEnum;
 
 public class Nature {
 	

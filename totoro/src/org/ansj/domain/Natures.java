@@ -1,7 +1,10 @@
-package org.ansj.library;
+package org.ansj.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.ansj.library.NatureEnum;
+import org.ansj.library.NatureMap;
 
 public final class Natures {
 
@@ -11,7 +14,13 @@ public final class Natures {
 		natures.add(new Nature(NatureEnum.valueOf(nature),weight)) ;
 	}
 	
-	public Natures(){
+	public Natures(String natureStr){
+		String[] split = natureStr.split(",") ;
+		String[] strs = null ;
+		for (int i = 0; i < split.length; i++) {
+			strs = split[i].split(":") ;
+			this.add(strs[0], Integer.parseInt(strs[1])) ;
+		}
 	}
 
 	
