@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import org.ansj.domain.Term;
 
 /**
- * 最短路径
+ * 最短路径 
  * @author ansj
  *
  */
