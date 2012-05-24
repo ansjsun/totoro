@@ -1,12 +1,15 @@
 package org.ansj.splitWord.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.ansj.library.InitDictionary.base;
+import static org.ansj.library.InitDictionary.check;
+import static org.ansj.library.InitDictionary.natures;
+import static org.ansj.library.InitDictionary.status;
+import static org.ansj.library.InitDictionary.words;
 
+import org.ansj.domain.Natures;
 import org.ansj.library.InitDictionary;
 import org.ansj.splitWord.GetWords;
 import org.ansj.util.WordAlert;
-import static org.ansj.library.InitDictionary.* ;
 
 public class GetWordsImpl implements GetWords {
 
@@ -170,14 +173,14 @@ public class GetWordsImpl implements GetWords {
 	 */
 	public float getWeight() {
 		// TODO Auto-generated method stub
-		return weights[tempBaseValue];
+		return natures[tempBaseValue].maxWeight;
 	}
 
 	/**
 	 * 获得当前词的词性
 	 * @return
 	 */
-	public String getNature() {
+	public Natures getNature() {
 		// TODO Auto-generated method stub
 		return natures[tempBaseValue];
 	}

@@ -1,69 +1,40 @@
 package org.ansj.library;
 
 import java.io.BufferedReader;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
+import java.io.IOException;
 import java.util.HashMap;
 
+import org.ansj.domain.Natures;
 import org.ansj.util.IOUtil;
-import org.ansj.util.MyStaticValue;
 
 public class InitDictionary {
 	/**
-	 * arrayLength : 记录了数组的大小
-	 */
-	private static final int ARRAYLENGTH = 562940;
-	/**
 	 * base: 数组用来存放单词的转换..其实就是一个DFA转换过程
 	 */
-	public static int[] base = new int[ARRAYLENGTH];
+	public static int[] base = null ;
 	/**
 	 * check: 数组用来验证里面存储的是上一个状态的位置
 	 */
-	public static int[] check = new int[ARRAYLENGTH];
+	public static int[] check = null ;
 	/**
 	 * status: 用来判断一个单词的状态 1.为不成词.处于过度阶段 2.成次也可能是词语的一部分. 3.词语结束 example: 中 1 中华
 	 * 2 中华人 1 中华人民 3
 	 */
-	public static byte[] status = new byte[ARRAYLENGTH];
+	public static byte[] status = null ;
 	/**
 	 * words : 数组所在位置的词
 	 */
-	public static String[] words = new String[ARRAYLENGTH];
+	public static String[] words = null ;
 	/**
-	 * weights : 权重
+	 * weights : 词性词典,以及词性的相关权重
 	 */
-	public static int[] weights = new int[ARRAYLENGTH];
-	/**
-	 * nature : 词性
-	 */
-	public static String[] natures = new String[ARRAYLENGTH];
-	/**
-	 * 
-	 */
-	public static HashMap<Character,Integer> nameMap = new HashMap<Character,Integer>() ;
+	public static Natures[] natures = null ;
 	
 	/**
 	 * arraysPath: base编码的硬盘位置
 	 */
 	public static String arraysPath = "library/arrays.dic";
-	/**
-	 * arraysNumberPath: 数字词典硬盘位置
-	 */
-	public static String arraysNumberPath = MyStaticValue.rb.getString("number");
-	/**
-	 * arraysEnglishPath: 英语词典的硬盘位置
-	 */
-	public static String arraysEnglishPath = MyStaticValue.rb.getString("english");
-	/**
-	 * arrayNamePath: 姓名词典的硬盘位置
-	 */
-	public static String arraysNamePath = MyStaticValue.rb.getString("familyName") ;
 	
-	/**
-	 * arraysStopPath: 标点符号截断词词典
-	 */
-	public static String arraysStopPath = MyStaticValue.rb.getString("stop");
 	/**
 	 * 两本词典的字符编码
 	 */
@@ -80,7 +51,6 @@ public class InitDictionary {
 			long start = System.currentTimeMillis();
 			try {
 				initArrays();
-				natures[0] = "N" ;
 				isInit = true ;
 				System.out.println("词典加载完成用时:"
 						+ (System.currentTimeMillis() - start) + "毫秒");
@@ -99,9 +69,37 @@ public class InitDictionary {
 	 */
 	public static void initArrays() throws Exception {
 		BufferedReader reader = IOUtil.getReader(arraysPath, charEncoding);
+		initArraySize(reader) ;
+		reader.close() ;
+		reader = IOUtil.getReader(arraysPath, charEncoding);
 		initArrays(reader) ;
+		reader.close() ;
 	}
 	
+	private static void initArraySize(BufferedReader reader) throws IOException {
+		// TODO Auto-generated method stub
+		String temp = null ;
+		String last = null ;
+		while((temp=reader.readLine())!=null){
+			last = temp ;
+		}
+		
+		String[] strs = last.split("	") ;
+		
+		int arrayLength = Integer.parseInt(strs[0]) + 1;
+		
+		base = new int[arrayLength];
+
+		check = new int[arrayLength];
+
+		status = new byte[arrayLength];
+
+		words = new String[arrayLength];
+		
+		natures = new Natures[arrayLength] ;
+		
+	}
+
 	public static void initArrays(BufferedReader reader) throws Exception{
 		String temp = null;
 		String[] strs = null;
@@ -113,34 +111,23 @@ public class InitDictionary {
 			base[num] = Integer.parseInt(strs[2]);
 			check[num] = Integer.parseInt(strs[3]);
 			status[num] = Byte.parseByte(strs[4]);
-			
 			if(!"null".equals(strs[5])){
-				natures[num] = strs[5] ;
-				weights[num] = Integer.parseInt(strs[6]) ;
+				natures[num] = new Natures(strs[5]) ;
+			}else{
+				natures[num] = Natures.NULL ;
 			}
 		}
 		reader.close() ;
 	}
 	
 	
-	/**
-	 * 加载姓名词典
-	 * @throws UnsupportedEncodingException 
-	 */
-	public static void initNameLibrary() throws Exception{
-		BufferedReader reader = IOUtil.getReader(arraysNamePath, "UTF-8") ;
-		String temp = null;
-		String[] strs = null ;
-		while ((temp = reader.readLine()) != null) {
-			strs = temp.split("	") ;
-			nameMap.put(strs[0].charAt(0), Integer.parseInt(strs[1])) ;
-		}
-	}
-
-
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 		init();
 		System.out.println(System.currentTimeMillis() - start);
+		
+		HashMap hm = new HashMap() ;
+		hm.put("1", "1") ;
+		System.out.println(hm);
 	}
 }

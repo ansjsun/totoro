@@ -48,20 +48,40 @@ public class Test {
 		String str = null ;
 		long start = System.currentTimeMillis() ;
 //		BufferedReader br = IOUtil.getReader("C://Users//ansj//Desktop//新建文本文档.txt", "GBK") ;
-		BufferedReader br = new BufferedReader(new StringReader("结婚的和尚未结婚的")) ;
-		while((str=br.readLine())!=null){
-			GetWordsImpl gwi = new GetWordsImpl();
-			gwi.setStr(str);
-			String temp= null;
-			Graph gp = new Graph(str.length()) ;
-			while((temp=gwi.allWords())!=null){
-				gp.addTerm(new Term(temp,gwi.offe,gwi.getWeight(),gwi.getNature())) ;
-			}
-			gp.getPath();
-//			System.out.println(gp);
-			Term term = gp.optimalRoot() ;
-			while((term=term.getMaxTo())!=null){
-				System.out.println(term);
+		String[] strs = new String[100] ;
+		strs[0] = "他说的确实在理" ;
+		strs[1] = "长春市长春节讲话" ;
+		strs[2] = "结婚的和尚未结婚的" ;
+		strs[3] = "结合成分子时" ;
+		strs[4] = "旅游和服务是最好的" ;
+		strs[5] = "邓颖超生前最喜欢的一个东西" ;
+		strs[6] = "中国航天官员应邀到美国与太空总署官员开会" ;
+		strs[7] = "上海大学城书店" ;
+		strs[8] = "北京大学生前来应聘" ;
+		strs[9] = "中外科学名著" ;
+		strs[10] = "为人民服务" ;
+		strs[11] = "独立自主和平等互利的原则" ;
+		strs[12] = "为人民办公益" ;
+		strs[13] = "这事的确定不下来" ;
+		strs[14] = "费孝通向人大常委会提交书面报告" ;
+		
+		for (int i = 0; i < strs.length; i++) {
+			if(strs[i]==null)break ;
+			BufferedReader br = new BufferedReader(new StringReader(strs[i])) ;
+			while((str=br.readLine())!=null){
+				GetWordsImpl gwi = new GetWordsImpl();
+				gwi.setStr(str);
+				String temp= null;
+				Graph gp = new Graph(str.length()) ;
+				while((temp=gwi.allWords())!=null){
+					gp.addTerm(new Term(temp,gwi.offe,gwi.getWeight(),gwi.getNature())) ;
+				}
+				gp.getPath();
+				System.out.println(gp);
+//				Term term = gp.optimalRoot() ;
+//				while((term=term.getMaxTo())!=null){
+//					System.out.println(term);
+//				}
 			}
 		}
 		System.out.println(System.currentTimeMillis()-start);

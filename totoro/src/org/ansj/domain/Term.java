@@ -14,19 +14,24 @@ public class Term {
 	// 路径权重
 	private float weight = Float.MAX_VALUE;
 	// 词性
-	private String nature;
+	private Natures natures;
 
-	public Term(String name, int offe, float weight, String nature) {
+	public Term(String name, int offe, float weight, Natures natures) {
 		super();
 		this.name = name;
 		this.offe = offe;
-		if (name.length() > 1) {
-			this.weight = weight / (1000 * name.length());
-		} else {
-			this.weight = weight==0?10000:weight;
-		}
+//		if (name.length() > 1) {
+//			this.weight = weight / (1000 * name.length());
+//		} else {
+//			this.weight = weight==0?10000:weight;
+//		}
+		
+		if(name.length()>1)
+			this.weight = weight ;
+		else
+			this.weight = 1 ;
 
-		this.nature = nature==null?"N":nature;
+		this.natures = natures==null?Natures.NULL:natures;
 	}
 
 	// 可以到达的位置
@@ -54,7 +59,7 @@ public class Term {
 		return weight;
 	}
 
-	public void setWeight(Term term) {
+	public void setPathWeight(Term term) {
 		if(term.offe>0&&term.maxFrom==null){
 			return ;
 		}
@@ -63,7 +68,7 @@ public class Term {
 			this.maxFrom = term;
 		} else {
 			float score = this.weight - maxFrom.getWeight() + term.getWeight();
-			if (score <= weight) {
+			if (score >= weight) {
 				this.weight = score;
 				this.maxFrom = term;
 			}
@@ -72,7 +77,7 @@ public class Term {
 	}
 
 	public String toString() {
-		return this.name + "/" + this.nature;
+		return this.name + ":" +this.weight+"/";
 	}
 
 	public Term getMaxFrom() {
@@ -91,9 +96,6 @@ public class Term {
 		this.maxTo = maxTo;
 	}
 
-	public String getNature() {
-		return nature;
-	}
 
 	public void setWeight(float weight) {
 		this.weight = weight;

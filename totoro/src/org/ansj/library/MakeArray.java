@@ -4,10 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.ansj.domain.Natures;
 import org.ansj.util.IOUtil;
+import org.ansj.util.MyStaticValue;
 
 public class MakeArray {
 	// 终极目标
@@ -15,19 +17,36 @@ public class MakeArray {
 	// 验证数组
 	public static int check[] = new int[1000000];
 	// 词语状态
-	public static int status[] = new int[1000000];
+	public static byte status[] = new byte[1000000];
 	// 当前数组的词
 	public static String words[] = new String[1000000];
-	// nature
-	public static Natures natures[] = new Natures[1000000];
-	// weight
-	public static String weights[] = new String[1000000];
-
-	public static void main(String[] args) throws Exception {
-		long start = System.currentTimeMillis();
-		makeBaseArray();
-		System.out.println(System.currentTimeMillis() - start);
+	// natureAndWeight
+	public static HashMap<String,Integer> natures[] = new HashMap[1000000];
+	
+	private static final HashMap<String,Integer> EN = new HashMap<String,Integer>() ;
+	private static final HashMap<String,Integer> NB = new HashMap<String,Integer>() ;
+	private static final HashMap<String,Integer> PO = new HashMap<String,Integer>() ;
+	
+	/**
+	 * arraysNumberPath: 数字词典硬盘位置
+	 */
+	public static String arraysNumberPath = MyStaticValue.rb.getString("number");
+	/**
+	 * arraysEnglishPath: 英语词典的硬盘位置
+	 */
+	public static String arraysEnglishPath = MyStaticValue.rb.getString("english");
+	
+	/**
+	 * arraysStopPath: 标点符号截断词词典
+	 */
+	public static String arraysStopPath = MyStaticValue.rb.getString("stop");
+	
+	static{
+		EN.put("en", 1) ;
+		NB.put("nb",1) ;
+		PO.put("po",1) ;
 	}
+
 
 	/**
 	 * path 排序好词典的路径 haspath 字符编码字典的路径 arrayPath 生成字典的路径 charEncoding
@@ -43,25 +62,23 @@ public class MakeArray {
 	 */
 
 	private static int previous;
-	private static Map<String, String> tempStringMap = new HashMap<String, String>();
+	private static Map<String, Branch> tempStringMap = new HashMap<String, Branch>();
 
-	public static void makeBaseArray() throws Exception {
+	public static void makeArray(List<Branch> all) throws Exception {
 		//加载数字词典
-		BufferedReader reader = IOUtil.getReader(
-				InitDictionary.arraysNumberPath, charEncoding);
+		BufferedReader reader = IOUtil.getReader(arraysNumberPath, charEncoding);
 		makeASCIIArray(reader);
 		reader.close() ;
 		
 		//加载英语词典
-		reader = IOUtil.getReader(InitDictionary.arraysEnglishPath,
-				charEncoding);
+		reader = IOUtil.getReader(arraysEnglishPath,charEncoding);
 		makeASCIIArray(reader);
 		reader.close() ;
 		
 		
 		//加载主词典
 		reader = IOUtil.getReader(path, charEncoding);
-		makeBaseArray(reader);
+		makeBaseArray(all);
 		writeLibrary();
 		reader.close() ;
 	}
@@ -69,29 +86,28 @@ public class MakeArray {
 	/**
 	 * 数组的生成
 	 */
-	public static void makeBaseArray(BufferedReader reader) throws Exception {
+	private static void makeBaseArray(List<Branch> all) throws Exception {
 		char[] chars = null;
 		int length = 0;
-		String tempValue;
-		String tempValueResult;
-		String[] strs = null;
+		Branch tempValueResult;
 		int tempBase = 0;
 		String temp = null;
-		while ((tempValue = reader.readLine()) != null) {
-			strs = tempValue.split("	");
-			temp = strs[0];
+		Branch branch = null ;
+		for (int i = 0; i < all.size(); i++) {
+			branch = all.get(i) ;
+			temp = branch.getValue();
 			chars = temp.toCharArray();
 			length = chars.length;
 			if (length == 1) {
 				base[chars[0]] = 40863;
 				check[chars[0]] = -1;
-				status[chars[0]] = Integer.parseInt(strs[1]);
+				status[chars[0]] = branch.getStatus();
 				words[chars[0]] = temp;
-				natures[chars[0]] = new Natures(strs[2]) ;
+				natures[chars[0]] = branch.getNatures() ;
 			} else {
 				int previousCheck = getBaseNum(chars);
 				if (previous == previousCheck) {
-					tempStringMap.put(temp, tempValue);
+					tempStringMap.put(temp, branch);
 					continue;
 				}
 				if (tempStringMap.size() > 0) {
@@ -99,35 +115,32 @@ public class MakeArray {
 					it = tempStringMap.values().iterator();
 					while (it.hasNext()) {
 						tempValueResult = it.next();
-						strs = tempValueResult.split("	");
-						chars = strs[0].toCharArray();
+						chars = tempValueResult.getValue().toCharArray();
 						tempBase = base[previous] + chars[chars.length - 1];
 						base[tempBase] = tempBase;
 						check[tempBase] = previous;
-						status[tempBase] = Integer.parseInt(strs[1]);
-						words[tempBase] = strs[0];
-						natures[chars[0]] = new Natures(strs[2]) ;
+						status[tempBase] = tempValueResult.getStatus();
+						words[tempBase] = tempValueResult.getValue();
+						natures[tempBase] = tempValueResult.getNatures() ;
 					}
 				}
 				previous = previousCheck;
-				tempStringMap = new HashMap<String, String>();
-				tempStringMap.put(temp, tempValue);
+				tempStringMap = new HashMap<String, Branch>();
+				tempStringMap.put(temp,branch);
 
 			}
 		}
 	}
-	private static final Natures EN =  new Natures("en",1) ;
-	private static final Natures NB =  new Natures("nb",1) ;
-	private static final Natures PO =  new Natures("po",1) ;
 
+	
 	public static void makeASCIIArray(BufferedReader reader) throws IOException {
 		String temp = null;
 		String[] strs = null;
 		int baseValue = 0;
-		int sta = 0;
+		byte sta = 0;
 		while ((temp = reader.readLine()) != null) {
 			strs = temp.split("\t");
-			sta = Integer.parseInt(strs[1]);
+			sta = Byte.parseByte(strs[1]);
 			baseValue = strs[0].charAt(0);
 			base[baseValue] = baseValue;
 			check[baseValue] = -1;
@@ -135,13 +148,13 @@ public class MakeArray {
 			words[baseValue] = strs[0];
 			switch (sta) {
 			case 4:
-				natures[baseValue] = EN;
+				natures[baseValue] = EN ;
 				break;
 			case 5:
-				natures[baseValue] = NB;
+				natures[baseValue] = NB ;
 				break;
 			case -1:
-				natures[baseValue] = PO;
+				natures[baseValue] = PO ;
 				break;
 			}
 		}
@@ -156,8 +169,7 @@ public class MakeArray {
 			if (base[i] > 0) {
 				sb
 						.append(i + "	" + words[i] + "	" + base[i] + "	"
-								+ check[i] + "	" + status[i] + "	" + natures[i]
-								+ "	" + weights[i]);
+								+ check[i] + "	" + status[i] + "	" + natures[i]);
 				sb.append("\n");
 			}
 		}
@@ -170,12 +182,12 @@ public class MakeArray {
 	 * @param tempString
 	 *            以父开头单词的全部集合
 	 */
-	private static Iterator<String> it;
+	private static Iterator<Branch> it;
 	private static char[] chars = null;;
 
-	public static void setBaseValue(Map<String, String> tempStringMap,
+	public static void setBaseValue(Map<String, Branch> tempStringMap,
 			int tempBase) {
-		it = tempStringMap.keySet().iterator();
+		Iterator<String> it = tempStringMap.keySet().iterator();
 		while (it.hasNext()) {
 			chars = it.next().toCharArray();
 			if (!isHave(base[tempBase] + chars[chars.length - 1])) {

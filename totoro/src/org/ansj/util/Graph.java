@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import org.ansj.domain.Term;
 
 /**
- * 最短路径 
+ * 最短路径
  * @author ansj
  *
  */
@@ -32,7 +32,7 @@ public class Graph {
 					if(to>=terms.length)continue ;
 					for (int k = 0; k < terms[to].length; k++) {
 						if(terms[to][k]!=null){
-							terms[to][k].setWeight(terms[i][j]) ;
+							terms[to][k].setPathWeight(terms[i][j]) ;
 						}
 					}
 				}
@@ -109,3 +109,7 @@ public class Graph {
 		}
 	}
 }
+
+	
+
+
