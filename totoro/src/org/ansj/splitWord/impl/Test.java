@@ -64,27 +64,38 @@ public class Test {
 		strs[12] = "为人民办公益" ;
 		strs[13] = "这事的确定不下来" ;
 		strs[14] = "费孝通向人大常委会提交书面报告" ;
-		
-		for (int i = 0; i < strs.length; i++) {
-			if(strs[i]==null)break ;
-			BufferedReader br = new BufferedReader(new StringReader(strs[i])) ;
-			while((str=br.readLine())!=null){
-				GetWordsImpl gwi = new GetWordsImpl();
-				gwi.setStr(str);
-				String temp= null;
-				Graph gp = new Graph(str.length()) ;
-				while((temp=gwi.allWords())!=null){
-					gp.addTerm(new Term(temp,gwi.offe,gwi.getWeight(),gwi.getNature())) ;
+		strs[15] = "aaa分事实上发货丨和无哦喝完酒" ;
+		strs[16] = "不好意思清清爽爽" ;
+		strs[17] = "长春市春节讲话" ;
+		strs[18] = "中华人民共和国万岁万岁万万岁" ;
+		strs[19] = "检察院鲍绍检察长" ;
+		strs[20] = "长春市长春药店" ;
+		int num  = 0 ;
+		for (int mm = 0; mm < 1; mm++) {
+			for (int i = 0; i < strs.length; i++) {
+				if(strs[i]==null)continue ;
+				num+=strs[i].length() ;
+				BufferedReader br = new BufferedReader(new StringReader(strs[i])) ;
+				while((str=br.readLine())!=null){
+					GetWordsImpl gwi = new GetWordsImpl();
+					gwi.setStr(str);
+					String temp= null;
+					Graph gp = new Graph(str.length()) ;
+					while((temp=gwi.allWords())!=null){
+						gp.addTerm(new Term(temp,gwi.offe,gwi.getWeight(),gwi.getNatures(),gwi.getMaxNature(),gwi.getStatus())) ;
+					}
+					System.out.println(gp.getPath().merger(3));;
+//					gp.print() ;
+//					System.out.println(gp);
+//					Term term = gp.optimalRoot() ;
+//					while((term=term.getMaxTo())!=null){
+//						System.out.println(term);
+//					}
 				}
-				gp.getPath();
-				System.out.println(gp);
-//				Term term = gp.optimalRoot() ;
-//				while((term=term.getMaxTo())!=null){
-//					System.out.println(term);
-//				}
 			}
 		}
 		System.out.println(System.currentTimeMillis()-start);
+		System.out.println(num);
 		
 	}
 }

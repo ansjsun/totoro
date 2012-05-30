@@ -8,6 +8,7 @@ import static org.ansj.library.InitDictionary.words;
 
 import org.ansj.domain.Natures;
 import org.ansj.library.InitDictionary;
+import org.ansj.library.NatureEnum;
 import org.ansj.splitWord.GetWords;
 import org.ansj.util.WordAlert;
 
@@ -171,8 +172,11 @@ public class GetWordsImpl implements GetWords {
 	 * 获得当前词的权重
 	 * @return
 	 */
-	public float getWeight() {
+	public int getWeight() {
 		// TODO Auto-generated method stub
+		if(natures[tempBaseValue] == null){
+			return -100 ;
+		}
 		return natures[tempBaseValue].maxWeight;
 	}
 
@@ -180,9 +184,19 @@ public class GetWordsImpl implements GetWords {
 	 * 获得当前词的词性
 	 * @return
 	 */
-	public Natures getNature() {
+	public Natures getNatures() {
 		// TODO Auto-generated method stub
+		if(natures[tempBaseValue] == null){
+			return Natures.NULL ;
+		}
 		return natures[tempBaseValue];
+	}
+	
+	public NatureEnum getMaxNature() {
+		if(natures[tempBaseValue] == null){
+			return Natures.NULL.maxNature ;
+		}
+		return natures[tempBaseValue].maxNature ;
 	}
 
 	/**
@@ -191,6 +205,11 @@ public class GetWordsImpl implements GetWords {
 	 */
 	public int getBaseOffe() {
 		return baseOffe-chars.length+offe;
+	}
+
+	public byte getStatus() {
+		// TODO Auto-generated method stub
+		return status[tempBaseValue];
 	}
 	
 	

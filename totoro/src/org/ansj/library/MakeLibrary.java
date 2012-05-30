@@ -16,6 +16,7 @@ public class MakeLibrary {
 	public static void main(String[] args) throws Exception {
 		long start = System.currentTimeMillis();
 		// englishLibrary() ;
+		new String() ;
 		makeLibrary();
 		System.out.println(System.currentTimeMillis() - start);
 	}
@@ -25,10 +26,10 @@ public class MakeLibrary {
 	 * 
 	 * @throws Exception
 	 */
-	// public static void englishLibrary() throws Exception{
-	// String[] stringArray = MyStaticValue.ENGLISH.split("") ;
-	// String str = natureLibrary(stringArray,4) ;
-	// IOUtil.Writer(InitDictionary.arraysEnglishPath, "UTF-8", str);
+//	 public static void englishLibrary() throws Exception{
+//	 String[] stringArray = MyStaticValue.ENGLISH.split("") ;
+//	 String str = natureLibrary(stringArray,4) ;
+//	 IOUtil.Writer(InitDictionary.arraysEnglishPath, "UTF-8", str);
 	// }
 	/**
 	 * 构造简单的数字词典 status:5

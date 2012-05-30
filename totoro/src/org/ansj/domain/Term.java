@@ -1,6 +1,6 @@
 package org.ansj.domain;
 
-import java.util.LinkedList;
+import org.ansj.library.NatureEnum;
 
 public class Term {
 	// 当前词
@@ -12,25 +12,23 @@ public class Term {
 	// 最优的去路径
 	private Term maxTo;
 	// 路径权重
-	private float weight = Float.MAX_VALUE;
-	// 词性
+	private int pathWeight = 0;
+	//当前term的权重
+	private int weight = 0 ;
+	// 词性列表
 	private Natures natures;
+	//最可能词性
+	public NatureEnum maxNature;
+	//当前词的状态
+	public byte status ;
 
-	public Term(String name, int offe, float weight, Natures natures) {
+	public Term(String name, int offe, int weight, Natures natures ,NatureEnum maxNature , byte status) {
 		super();
 		this.name = name;
 		this.offe = offe;
-//		if (name.length() > 1) {
-//			this.weight = weight / (1000 * name.length());
-//		} else {
-//			this.weight = weight==0?10000:weight;
-//		}
-		
-		if(name.length()>1)
-			this.weight = weight ;
-		else
-			this.weight = 1 ;
-
+		this.weight = weight ;
+		this.pathWeight = weight ;
+		this.maxNature = maxNature ;
 		this.natures = natures==null?Natures.NULL:natures;
 	}
 
@@ -55,21 +53,25 @@ public class Term {
 		this.name = name;
 	}
 
-	public float getWeight() {
-		return weight;
+	public int getWeight(int yuan) {
+		if(this.name.length()>yuan){
+			return weight;
+		}else{
+			return -100 ;
+		}
 	}
 
-	public void setPathWeight(Term term) {
+	public void setPathWeight(Term term, int yuan) {
 		if(term.offe>0&&term.maxFrom==null){
 			return ;
 		}
 		if (maxFrom == null) {
-			this.weight = term.getWeight() + this.weight;
+			this.pathWeight = term.pathWeight + this.getWeight(yuan);
 			this.maxFrom = term;
 		} else {
-			float score = this.weight - maxFrom.getWeight() + term.getWeight();
-			if (score >= weight) {
-				this.weight = score;
+			int score = term.pathWeight + this.getWeight(yuan);
+			if (score >= pathWeight) {
+				this.pathWeight = score;
 				this.maxFrom = term;
 			}
 		}
@@ -77,7 +79,7 @@ public class Term {
 	}
 
 	public String toString() {
-		return this.name + ":" +this.weight+"/";
+		return this.name + "/" +this.maxNature+" ";
 	}
 
 	public Term getMaxFrom() {
@@ -96,9 +98,19 @@ public class Term {
 		this.maxTo = maxTo;
 	}
 
-
-	public void setWeight(float weight) {
-		this.weight = weight;
+	public int getPathWeight() {
+		return pathWeight;
 	}
+
+	public int getWeight() {
+		return weight;
+	}
+
+	public void reset(int yuan) {
+		// TODO Auto-generated method stub
+		this.maxFrom = null ;
+		this.pathWeight = this.getWeight(yuan);
+	}
+
 
 }

@@ -11,8 +11,8 @@ public final class Natures {
 	public static final Natures NULL = new Natures("{NULL=1}") ;
 
 	public Map<NatureEnum,Integer> natures = new HashMap<NatureEnum,Integer>();
-	public int maxWeight;
-	private NatureEnum maxNature;
+	public int maxWeight = Integer.MIN_VALUE;
+	public NatureEnum maxNature;
 	
 	
 	public Natures(String natureStr){
