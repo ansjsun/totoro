@@ -3,11 +3,10 @@ package org.ansj.splitWord.impl;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
 
 import org.ansj.domain.Term;
+import org.ansj.splitWord.GetWords;
 import org.ansj.util.Graph;
-import org.ansj.util.IOUtil;
 
 public class Test {
 //	public static void main(String[] args) {
@@ -70,6 +69,11 @@ public class Test {
 		strs[18] = "中华人民共和国万岁万岁万万岁" ;
 		strs[19] = "检察院鲍绍检察长" ;
 		strs[20] = "长春市长春药店" ;
+		strs[21] = "乒乓球拍卖完了" ;
+		strs[22] = "据路透社报道，印度尼西亚社会事务部一官员星期二(29日)表示，"	
+                + "日惹市附近当地时间27日晨5时53分发生的里氏6.2级地震已经造成至少5427人死亡，"	
+                + "20000余人受伤，近20万人无家可归。" ;
+		strs[22] = "学习" ;
 		int num  = 0 ;
 		for (int mm = 0; mm < 1; mm++) {
 			for (int i = 0; i < strs.length; i++) {
@@ -77,16 +81,17 @@ public class Test {
 				num+=strs[i].length() ;
 				BufferedReader br = new BufferedReader(new StringReader(strs[i])) ;
 				while((str=br.readLine())!=null){
-					GetWordsImpl gwi = new GetWordsImpl();
+					CopyOfGetWordsImpl gwi = new CopyOfGetWordsImpl();
+//					GetWordsImpl gwi = new GetWordsImpl();
 					gwi.setStr(str);
 					String temp= null;
 					Graph gp = new Graph(str.length()) ;
 					while((temp=gwi.allWords())!=null){
 						gp.addTerm(new Term(temp,gwi.offe,gwi.getWeight(),gwi.getNatures(),gwi.getMaxNature(),gwi.getStatus())) ;
 					}
-					System.out.println(gp.getPath().merger(3));;
+					gp.getPath().merger(2);
 //					gp.print() ;
-//					System.out.println(gp);
+					System.out.println(gp);
 //					Term term = gp.optimalRoot() ;
 //					while((term=term.getMaxTo())!=null){
 //						System.out.println(term);

@@ -160,7 +160,7 @@ public class Graph {
 		/**
 		 * 将最终结果放到Term数组中
 		 */
-		private LinkedList<Term> getResultLinked(){
+		public LinkedList<Term> getResultLinked(){
 			LinkedList<Term> result = new LinkedList<Term>() ;
 			Term term = end ;
 			while((term=term.getMaxFrom())!=null){

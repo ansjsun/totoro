@@ -31,6 +31,12 @@ public class Term {
 		this.maxNature = maxNature ;
 		this.natures = natures==null?Natures.NULL:natures;
 	}
+	
+	public Term(String name ,int offe ,NatureEnum maxNature){
+		this.name = name ;
+		this.offe = offe ;
+		this.maxNature = maxNature ;
+	}
 
 	// 可以到达的位置
 	public int getTo() {

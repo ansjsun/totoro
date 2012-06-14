@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import org.ansj.domain.Natures;
 import org.ansj.util.IOUtil;
+import org.ansj.util.MyStaticValue;
 
 public class InitDictionary {
 	/**
@@ -33,7 +34,7 @@ public class InitDictionary {
 	/**
 	 * arraysPath: base编码的硬盘位置
 	 */
-	public static String arraysPath = "library/arrays.dic";
+	public static String arraysPath = MyStaticValue.rb.getString("library");
 	
 	/**
 	 * 两本词典的字符编码

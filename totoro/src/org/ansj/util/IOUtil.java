@@ -17,7 +17,6 @@ public class IOUtil {
 	private static FileOutputStream fos = null ;
 	public static InputStream getInputStream(String path){
 		try {
-			File f = new File(path) ;
 			return new FileInputStream(path) ;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

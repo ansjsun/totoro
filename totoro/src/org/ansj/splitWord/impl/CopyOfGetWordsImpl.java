@@ -10,8 +10,9 @@ import org.ansj.domain.Natures;
 import org.ansj.library.InitDictionary;
 import org.ansj.library.NatureEnum;
 import org.ansj.splitWord.GetWords;
+import org.ansj.util.WordAlert;
 
-public class GetWordsImpl implements GetWords {
+public class CopyOfGetWordsImpl implements GetWords {
 
 	/**
 	 * 记录上一次的偏移量
@@ -25,7 +26,7 @@ public class GetWordsImpl implements GetWords {
 	/**
 	 * 构造方法，同时加载词典,传入词语相当于同时调用了setStr() ;
 	 */
-	public GetWordsImpl(String str) {
+	public CopyOfGetWordsImpl(String str) {
 		InitDictionary.init();
 		setStr(str) ;
 	}
@@ -33,17 +34,20 @@ public class GetWordsImpl implements GetWords {
 	/**
 	 * 构造方法，同时加载词典
 	 */
-	public GetWordsImpl() {
+	public CopyOfGetWordsImpl() {
 		InitDictionary.init();
 	}
 
-	int charsLength = 0 ; 
-	public void setStr(String chars) {
-		this.chars = chars;
-		charsLength = chars.length() ;
+	public void setStr(String str) {
+		setStr(str.toCharArray()) ;
+		
 	}
 
-	public String chars;
+	public void setStr(char[] chars) {
+		this.chars = chars;
+	}
+
+	public char[] chars;
 	private int charHashCode;
 	private int start = 0;
 	public int end = 0;
@@ -54,13 +58,13 @@ public class GetWordsImpl implements GetWords {
 	private String str = null ;
 
 	public String allWords() {
-		for (; i < charsLength; i++) {
-			charHashCode = chars.charAt(i);
+		for (; i < chars.length; i++) {
+			charHashCode = chars[i];
 			end++;
 			switch (getStatement()) {
 			case 0:
-				if(baseValue==chars.charAt(i)){
-					str = ""+chars.charAt(i) ;
+				if(baseValue==chars[i]){
+					str = ""+chars[i] ;
 					offe = i ;
 					start  = ++i;
 					end = 0;
@@ -87,6 +91,36 @@ public class GetWordsImpl implements GetWords {
 				tempBaseValue = baseValue;
 				baseValue = 0;
 				return words[tempBaseValue];
+			case 4:
+				while(status[chars[i++]]==4&&i<chars.length){
+					end++ ;
+				}
+				if(i!=chars.length){
+					end-- ;
+				}
+				offe = tempOffe+start ;
+				str = WordAlert.alertEnglish(chars, start, end);
+				start = start+end ;
+				i = start ;
+				end = 0 ;
+				tempBaseValue = baseValue ;
+				baseValue = 0;
+				return str ;
+			case 5:
+				while(status[chars[i++]]==5&&i<chars.length){
+					end++ ;
+				}
+				if(i!=chars.length){
+					end-- ;
+				}
+				offe = tempOffe+start ;
+				str = WordAlert.alertNumber(chars, start, end);
+				start = start+end ;
+				i = start ;
+				end = 0 ;
+				tempBaseValue = baseValue ;
+				baseValue = 0;
+				return str ;
 			}
 			
 		}
@@ -94,7 +128,7 @@ public class GetWordsImpl implements GetWords {
 			i = start;
 			return allWords();
 		}
-		tempOffe += charsLength;
+		tempOffe += chars.length;
 		start = 0;
 		end = 0;
 		baseValue = 0;
@@ -109,6 +143,9 @@ public class GetWordsImpl implements GetWords {
 	 * @return
 	 */
 	private int getStatement() {
+//		if (charHashCode < 1) {
+//			return 0;
+//		}
 		checkValue = baseValue;
 		baseValue = base[checkValue] + charHashCode;
 		if (check[baseValue] == checkValue || check[baseValue] == -1) {

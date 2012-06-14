@@ -94,6 +94,24 @@ public class WordAlert {
 		}
 		return new String(chars,start,end) ;
 	}
+	
+	public static String alertEnglish(String temp , int start , int end){
+		char c = 0;
+		StringBuilder sb = new StringBuilder() ;
+		for (int i = start; i < start+end; i++) {
+			c = temp.charAt(i) ;
+			if(c>=MIN_LOWER&&c<=MAX_LOWER){
+				sb.append((char)(c-LOWER_GAP)) ;
+			}else if(c>=MIN_UPPER&&c<=MAX_UPPER){
+				sb.append((char)(c-UPPER_GAP)) ;
+			}else if(c>=MIN_UPPER_E&&c<=MAX_UPPER_E){
+				sb.append((char)(c-UPPER_GAP_E)) ;
+			}else{
+				sb.append(c) ;
+			}
+		}
+		return sb.toString() ;
+	}
 	public static String alertNumber(char[] chars , int start , int end){
 		for (int i = start; i < start+end; i++) {
 			if(chars[i]>=MIN_UPPER_N&&chars[i]<=MAX_UPPER_N){
@@ -101,5 +119,19 @@ public class WordAlert {
 			}
 		}
 		return new String(chars,start,end) ;
+	}
+	
+	public static String alertNumber(String temp , int start , int end){
+		char c = 0;
+		StringBuilder sb = new StringBuilder() ;
+		for (int i = start; i < start+end; i++) {
+			c = temp.charAt(i) ;
+			if(c>=MIN_UPPER_N&&c<=MAX_UPPER_N){
+				sb.append((char)(c-UPPER_GAP_N)) ;
+			}else{
+				sb.append(c) ;
+			}
+		}
+		return sb.toString() ;
 	}
 }
