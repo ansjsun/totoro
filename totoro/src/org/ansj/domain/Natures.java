@@ -42,6 +42,11 @@ public final class Natures {
 	public int getNatureIndex(String natureStr) {
 		return NatureMap.natrueMap.get(natureStr);
 	}
+	
+	public Integer getNatureWeight(NatureEnum nature) {
+		if(natures==null) return 0 ;
+		return natures.get(nature);
+	}
 
 	public int getNatureIndex(Nature nature) {
 		return NatureMap.natrueMap.get(nature);

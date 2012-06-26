@@ -1,5 +1,8 @@
 package org.ansj.splitWord;
 
+import static org.ansj.library.InitDictionary.natures;
+import static org.ansj.library.InitDictionary.status;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,13 +11,11 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.LinkedList;
 
-import static org.ansj.library.InitDictionary.natures;
-import static org.ansj.library.InitDictionary.status;
-
 import org.ansj.domain.Term;
 import org.ansj.library.NatureEnum;
 import org.ansj.splitWord.impl.GetWordsImpl;
 import org.ansj.util.Graph;
+import org.ansj.util.IOUtil;
 import org.ansj.util.StringUtil;
 import org.ansj.util.WordAlert;
 
@@ -35,7 +36,14 @@ public class ToAnalysis {
 	 * 记录上一次文本长度
 	 */
 	private int tempLength;
-
+	
+	/**
+	 * 是否识别人名
+	 */
+	private boolean isNameRe ;
+	
+	
+	
 	/**
 	 * 分词的类
 	 */
@@ -51,7 +59,7 @@ public class ToAnalysis {
 	 * 
 	 * @param str
 	 */
-	public ToAnalysis(String str) {
+	public ToAnalysis(String str, boolean isNameRe) {
 		br = new BufferedReader(new StringReader(str));
 	}
 
@@ -60,9 +68,11 @@ public class ToAnalysis {
 	 * 
 	 * @param reader
 	 */
-	public ToAnalysis(Reader reader) {
+	public ToAnalysis(Reader reader , boolean isNameRe) {
 		br = new BufferedReader(reader);
+		this.isNameRe = isNameRe ; 
 	}
+	
 
 	LinkedList<Term> terms = new LinkedList<Term>();
 
@@ -160,7 +170,11 @@ public class ToAnalysis {
 				while ((str = gwi.allWords()) != null) {
 					gp.addTerm(new Term(str, gwi.offe, gwi.getWeight(), gwi.getNatures(), gwi.getMaxNature()));
 				}
-				terms.addAll(gp.getPath().merger(2).getResultLinked());
+				if(isNameRe){
+					terms.addAll(gp.getPath().merger(2).mergerName());
+				}else{
+					terms.addAll(gp.getPath().merger(2).getResultLinked());
+				}
 				if (i < length) {
 					i -= 1;
 				}
@@ -170,13 +184,18 @@ public class ToAnalysis {
 	}
 
 	public static void main(String[] args) throws IOException {
-		Reader reader = new InputStreamReader(new FileInputStream("/Users/ansj/Documents/快盘/《活着》.txt"), "GBK");
-		ToAnalysis toAnalysis = new ToAnalysis(reader);
+		Reader reader = new InputStreamReader(new FileInputStream("/Users/ansj/Documents/快盘/冒死记录中国神秘事件（真全本）.txt"), "GBK");
+		ToAnalysis toAnalysis = new ToAnalysis(reader,true);
 		Term next = null;
 		long start = System.currentTimeMillis();
+		StringBuilder sb =  new StringBuilder() ;
 		while ((next = toAnalysis.next()) != null) {
-			System.out.println(next.getName() + ":" + next.getOffe());
+			System.out.println(next.getName() + ":" + next.maxNature);
+			sb.append(next.getName()+":"+next.maxNature) ;
+			sb.append("\n") ;
 		}
 		System.out.println(System.currentTimeMillis() - start);
+		IOUtil.Writer("/Users/ansj/Documents/快盘/冒死.txt", "UTF-8", sb.toString()) ;
+		
 	}
 }

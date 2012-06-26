@@ -182,14 +182,8 @@ public class Graph {
 		 * 
 		 * @return
 		 */
-		public Merger mergerName() {
-			LinkedList<Term> link = getResultLinked();
-			Term term = null;
-			for (Iterator<Term> iterator = link.iterator(); iterator.hasNext();) {
-				term = iterator.next();
-			}
-
-			return this;
+		public LinkedList<Term> mergerName() {
+			return NameRecognition.recognition(getResult());
 		}
 
 		/**

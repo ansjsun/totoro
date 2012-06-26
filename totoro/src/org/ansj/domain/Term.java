@@ -125,5 +125,16 @@ public class Term {
 		return natures;
 	}
 
+	/**
+	 * 进行term合并
+	 * @param term
+	 * @param maxNature
+	 */
+	public Term merage(Term term , NatureEnum maxNature){
+		this.name = this.name+term.getName() ;
+		this.maxTo = term.getMaxTo() ;
+		this.maxNature = maxNature ;
+		return this ;
+	}
 
 }
