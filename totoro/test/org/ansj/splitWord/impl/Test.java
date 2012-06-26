@@ -73,7 +73,7 @@ public class Test {
 		strs[22] = "据路透社报道，印度尼西亚社会事务部一官员星期二(29日)表示，"	
                 + "日惹市附近当地时间27日晨5时53分发生的里氏6.2级地震已经造成至少5427人死亡，"	
                 + "20000余人受伤，近20万人无家可归。" ;
-		strs[22] = "学习" ;
+		strs[23] = "刚试过" ;
 		int num  = 0 ;
 		for (int mm = 0; mm < 1; mm++) {
 			for (int i = 0; i < strs.length; i++) {
@@ -81,16 +81,16 @@ public class Test {
 				num+=strs[i].length() ;
 				BufferedReader br = new BufferedReader(new StringReader(strs[i])) ;
 				while((str=br.readLine())!=null){
-					CopyOfGetWordsImpl gwi = new CopyOfGetWordsImpl();
-//					GetWordsImpl gwi = new GetWordsImpl();
+//					CopyOfGetWordsImpl gwi = new CopyOfGetWordsImpl();
+					GetWordsImpl gwi = new GetWordsImpl();
 					gwi.setStr(str);
 					String temp= null;
-					Graph gp = new Graph(str.length()) ;
+					Graph gp = new Graph(str,0) ;
 					while((temp=gwi.allWords())!=null){
-						gp.addTerm(new Term(temp,gwi.offe,gwi.getWeight(),gwi.getNatures(),gwi.getMaxNature(),gwi.getStatus())) ;
+						gp.addTerm(new Term(temp,gwi.offe,gwi.getWeight(),gwi.getNatures(),gwi.getMaxNature())) ;
 					}
-					gp.getPath().merger(2);
 //					gp.print() ;
+					gp.getPath().merger(2);
 					System.out.println(gp);
 //					Term term = gp.optimalRoot() ;
 //					while((term=term.getMaxTo())!=null){

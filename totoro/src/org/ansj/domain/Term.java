@@ -19,10 +19,8 @@ public class Term {
 	private Natures natures;
 	//最可能词性
 	public NatureEnum maxNature;
-	//当前词的状态
-	public byte status ;
 
-	public Term(String name, int offe, int weight, Natures natures ,NatureEnum maxNature , byte status) {
+	public Term(String name, int offe, int weight, Natures natures ,NatureEnum maxNature ) {
 		super();
 		this.name = name;
 		this.offe = offe;
@@ -116,6 +114,15 @@ public class Term {
 		// TODO Auto-generated method stub
 		this.maxFrom = null ;
 		this.pathWeight = this.getWeight(yuan);
+	}
+
+	public void UpdateOffe(int baseOffe) {
+		// TODO Auto-generated method stub
+		this.offe+=baseOffe ;
+	}
+
+	public Natures getNatures() {
+		return natures;
 	}
 
 

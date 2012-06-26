@@ -14,10 +14,6 @@ import org.ansj.splitWord.GetWords;
 public class GetWordsImpl implements GetWords {
 
 	/**
-	 * 记录上一次的偏移量
-	 */
-	private int tempOffe;
-	/**
 	 * offe : 当前词的偏移量
 	 */
 	public int offe;
@@ -41,6 +37,7 @@ public class GetWordsImpl implements GetWords {
 	public void setStr(String chars) {
 		this.chars = chars;
 		charsLength = chars.length() ;
+		checkValue = 0;
 	}
 
 	public String chars;
@@ -76,11 +73,11 @@ public class GetWordsImpl implements GetWords {
 				}
 			case 2:
 				i++;
-				offe = tempOffe + start;
+				offe =  start;
 				tempBaseValue = baseValue ; 
 				return words[tempBaseValue];
 			case 3:
-				offe = tempOffe + start;
+				offe =  start;
 				start++;
 				i = start;
 				end = 0;
@@ -94,7 +91,6 @@ public class GetWordsImpl implements GetWords {
 			i = start;
 			return allWords();
 		}
-		tempOffe += charsLength;
 		start = 0;
 		end = 0;
 		baseValue = 0;
@@ -117,13 +113,6 @@ public class GetWordsImpl implements GetWords {
 		return 0;
 	}
 
-	/**
-	 * 重设分词
-	 */
-	public void reset() {
-		checkValue = 0;
-		tempOffe = 0;
-	}
 
 	/**
 	 * 获得当前词的权重

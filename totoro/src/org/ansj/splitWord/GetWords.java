@@ -36,8 +36,4 @@ public interface GetWords {
 	 * @param temp 传入的句子
 	 */
 	public void setStr(String temp);
-	/**
-	 * 重设分词
-	 */
-	public void reset() ;
 }
