@@ -1,4 +1,4 @@
-package org.ansj.splitWord;
+package org.ansj.splitWord.impl;
 
 import static org.ansj.library.InitDictionary.natures;
 import static org.ansj.library.InitDictionary.status;
@@ -13,7 +13,6 @@ import java.util.LinkedList;
 
 import org.ansj.domain.Term;
 import org.ansj.library.NatureEnum;
-import org.ansj.splitWord.impl.GetWordsImpl;
 import org.ansj.util.Graph;
 import org.ansj.util.IOUtil;
 import org.ansj.util.StringUtil;
@@ -183,19 +182,5 @@ public class ToAnalysis {
 		}
 	}
 
-	public static void main(String[] args) throws IOException {
-		Reader reader = new InputStreamReader(new FileInputStream("/Users/ansj/Documents/快盘/冒死记录中国神秘事件（真全本）.txt"), "GBK");
-		ToAnalysis toAnalysis = new ToAnalysis(reader,true);
-		Term next = null;
-		long start = System.currentTimeMillis();
-		StringBuilder sb =  new StringBuilder() ;
-		while ((next = toAnalysis.next()) != null) {
-			System.out.println(next.getName() + ":" + next.maxNature);
-			sb.append(next.getName()+":"+next.maxNature) ;
-			sb.append("\n") ;
-		}
-		System.out.println(System.currentTimeMillis() - start);
-		IOUtil.Writer("/Users/ansj/Documents/快盘/冒死.txt", "UTF-8", sb.toString()) ;
-		
-	}
+	
 }
