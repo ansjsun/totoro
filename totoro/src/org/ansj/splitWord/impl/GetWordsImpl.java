@@ -150,8 +150,5 @@ public class GetWordsImpl implements GetWords {
 		return status[tempBaseValue];
 	}
 	
-	
-
-	
 
 }

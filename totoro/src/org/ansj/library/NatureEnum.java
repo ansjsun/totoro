@@ -102,5 +102,6 @@ public enum NatureEnum {
 	dl,
 	nb,
 	en,
-	po;
+	po, 
+	userDefine; //用户自定义词典
 }

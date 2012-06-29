@@ -1,4 +1,4 @@
-package org.ansj.splitWord.impl;
+package org.ansj.splitWord.analysis;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -47,9 +47,6 @@ public class FilterAnalysis extends ToAnalysis {
 				return null;
 			}
 		}
-		// else {
-		// return null;
-		// }
 		return term;
 	}
 

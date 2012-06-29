@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 import org.ansj.domain.Term;
+import org.ansj.splitWord.analysis.FilterAnalysis;
 
 public class FilterAnalysisText {
 	public static void main(String[] args) throws IOException {

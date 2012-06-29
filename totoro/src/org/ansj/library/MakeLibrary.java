@@ -16,7 +16,6 @@ public class MakeLibrary {
 	public static void main(String[] args) throws Exception {
 		long start = System.currentTimeMillis();
 		// englishLibrary() ;
-		new String() ;
 		makeLibrary();
 		System.out.println(System.currentTimeMillis() - start);
 	}
@@ -76,6 +75,7 @@ public class MakeLibrary {
 			if (line.contains("#")) {
 				continue;
 			}
+			System.out.println(line);
 			keyWords.add(line);
 		}
 		ltr.addLibrary(keyWords);

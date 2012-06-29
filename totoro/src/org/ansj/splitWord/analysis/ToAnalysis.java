@@ -1,20 +1,18 @@
-package org.ansj.splitWord.impl;
+package org.ansj.splitWord.analysis;
 
 import static org.ansj.library.InitDictionary.natures;
 import static org.ansj.library.InitDictionary.status;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.LinkedList;
 
 import org.ansj.domain.Term;
 import org.ansj.library.NatureEnum;
+import org.ansj.splitWord.impl.GetWordsImpl;
 import org.ansj.util.Graph;
-import org.ansj.util.IOUtil;
 import org.ansj.util.StringUtil;
 import org.ansj.util.WordAlert;
 
@@ -73,7 +71,7 @@ public class ToAnalysis {
 	}
 	
 
-	LinkedList<Term> terms = new LinkedList<Term>();
+	private LinkedList<Term> terms = new LinkedList<Term>();
 
 	/**
 	 * while 循环调用.直到返回为null则分词结束

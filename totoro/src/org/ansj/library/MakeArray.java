@@ -77,10 +77,10 @@ public class MakeArray {
 		
 		
 		//加载主词典
-		reader = IOUtil.getReader(path, charEncoding);
+//		reader = IOUtil.getReader(path, charEncoding);
 		makeBaseArray(all);
 		writeLibrary();
-		reader.close() ;
+//		reader.close() ;
 	}
 
 	/**
