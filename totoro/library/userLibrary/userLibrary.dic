@@ -272,7 +272,6 @@ userDefine	比特精灵	1000
 userDefine	比特率	1000
 userDefine	比特信令	1000
 userDefine	比特彗星	1000
-userDefine	比学	1000
 userDefine	比值控制	1000
 userDefine	笔本电脑处理器	1000
 userDefine	笔本化	1000
@@ -527,33 +526,6 @@ userDefine	不变	1000
 userDefine	不变代码移出	1000
 userDefine	不变模式	1000
 userDefine	不变式	1000
-userDefine	不产权	1000
-userDefine	不等长编码	1000
-userDefine	不定不定式	1000
-userDefine	不断电源	1000
-userDefine	不归制	1000
-userDefine	不合逻	1000
-userDefine	不交付项	1000
-userDefine	不精确推理	1000
-userDefine	不精确中断	1000
-userDefine	不可抵赖	1000
-userDefine	不可分页动态区	1000
-userDefine	不可复	1000
-userDefine	不可靠程	1000
-userDefine	不可逆加密	1000
-userDefine	不可判定	1000
-userDefine	不启用	1000
-userDefine	不确定据	1000
-userDefine	不确定推理	1000
-userDefine	不确定性推理	1000
-userDefine	不确定知	1000
-userDefine	不透明度	1000
-userDefine	不完全排错	1000
-userDefine	不完全数据	1000
-userDefine	不完全信息	1000
-userDefine	不完全性	1000
-userDefine	不完全性理	1000
-userDefine	不性	1000
 userDefine	布尔表式	1000
 userDefine	布尔查找	1000
 userDefine	布尔程	1000
@@ -791,7 +763,6 @@ userDefine	产生式知	1000
 userDefine	场地故	1000
 userDefine	场地治	1000
 userDefine	常密码体制	1000
-userDefine	常明	1000
 userDefine	常数传播	1000
 userDefine	常数合并	1000
 userDefine	常态分布	1000
@@ -984,31 +955,6 @@ userDefine	出错封锁	1000
 userDefine	出错率	1000
 userDefine	出错文件	1000
 userDefine	出错中断	1000
-userDefine	出错中断处理	1000
-userDefine	出带	1000
-userDefine	出点	1000
-userDefine	出电	1000
-userDefine	出度	1000
-userDefine	出断	1000
-userDefine	出分组反	1000
-userDefine	出流	1000
-userDefine	出脉冲	1000
-userDefine	出模式	1000
-userDefine	出配置	1000
-userDefine	出时	1000
-userDefine	出事件	1000
-userDefine	出特性	1000
-userDefine	出提交	1000
-userDefine	出下拉电阻	1000
-userDefine	出现网	1000
-userDefine	出现序列	1000
-userDefine	出线	1000
-userDefine	出循环	1000
-userDefine	出依赖	1000
-userDefine	出优先级	1000
-userDefine	出字母表	1000
-userDefine	出字文本	1000
-userDefine	出阻抗	1000
 userDefine	除错	1000
 userDefine	除法	1000
 userDefine	除法回	1000
@@ -1257,10 +1203,7 @@ userDefine	存储周期	1000
 userDefine	存储转发	1000
 userDefine	存储转发网	1000
 userDefine	存档网点	1000
-userDefine	存到文件	1000
-userDefine	存到字	1000
 userDefine	存根	1000
-userDefine	存管理软件	1000
 userDefine	存取	1000
 userDefine	存取表	1000
 userDefine	存取冲突	1000
@@ -1485,7 +1428,6 @@ userDefine	单元编码	1000
 userDefine	单元测	1000
 userDefine	单元测试	1000
 userDefine	单元测试工具	1000
-userDefine	单元格到文件	1000
 userDefine	单指令	1000
 userDefine	单字校正	1000
 userDefine	单总线	1000
@@ -1523,15 +1465,6 @@ userDefine	导航	1000
 userDefine	导入收	1000
 userDefine	导入约	1000
 userDefine	导数估	1000
-userDefine	到半	1000
-userDefine	到长整数	1000
-userDefine	到短整数	1000
-userDefine	到录	1000
-userDefine	到全	1000
-userDefine	到尾录	1000
-userDefine	到小写	1000
-userDefine	到循环尾	1000
-userDefine	到字	1000
 userDefine	道串扰	1000
 userDefine	道二极管	1000
 userDefine	道密度	1000
@@ -1641,7 +1574,6 @@ userDefine	递推联想拼入法	1000
 userDefine	点播	1000
 userDefine	点插拔力	1000
 userDefine	点插值	1000
-userDefine	点到点	1000
 userDefine	点点通	1000
 userDefine	点对点接	1000
 userDefine	点对点通信	1000
@@ -2292,7 +2224,6 @@ userDefine	多行标签	1000
 userDefine	多行收	1000
 userDefine	多行注	1000
 userDefine	多样性	1000
-userDefine	多页到	1000
 userDefine	多义	1000
 userDefine	多义文法	1000
 userDefine	多义性	1000
@@ -2354,7 +2285,6 @@ userDefine	二阶参数续	1000
 userDefine	二阶几何续	1000
 userDefine	二阶逻	1000
 userDefine	二推理	1000
-userDefine	二元对立的	1000
 userDefine	二元法	1000
 userDefine	二元关系	1000
 userDefine	二元式	1000
@@ -2367,41 +2297,10 @@ userDefine	二制算	1000
 userDefine	二制坛	1000
 userDefine	二制文件	1000
 userDefine	二制字符	1000
-userDefine	发比	1000
-userDefine	发错	1000
-userDefine	发对象	1000
-userDefine	发故	1000
-userDefine	发光尺寸	1000
-userDefine	发光二极管显示	1000
-userDefine	发光二极管印刷机	1000
-userDefine	发结构	1000
-userDefine	发冷却	1000
-userDefine	发器	1000
+userDefine	发光二极管	1000
 userDefine	发散束卷积法	1000
 userDefine	发射	1000
 userDefine	发射极点接	1000
-userDefine	发射极下拉电阻	1000
-userDefine	发射上	1000
-userDefine	发射下	1000
-userDefine	发声延	1000
-userDefine	发生	1000
-userDefine	发生权	1000
-userDefine	发送者	1000
-userDefine	发学	1000
-userDefine	发展心理学	1000
-userDefine	法范畴	1000
-userDefine	法分析	1000
-userDefine	法分析程序	1000
-userDefine	法分析器	1000
-userDefine	法功	1000
-userDefine	法关系	1000
-userDefine	法关系树库	1000
-userDefine	法律句法则	1000
-userDefine	法描	1000
-userDefine	法属性	1000
-userDefine	法天生假	1000
-userDefine	法线流	1000
-userDefine	法耀	1000
 userDefine	翻程序	1000
 userDefine	翻等值性	1000
 userDefine	翻加百科	1000
@@ -2430,7 +2329,6 @@ userDefine	反码	1000
 userDefine	反启杀手	1000
 userDefine	反桥接故	1000
 userDefine	反窃听置	1000
-userDefine	反射的	1000
 userDefine	反射电压	1000
 userDefine	反射定律	1000
 userDefine	反射库	1000
@@ -2596,7 +2494,7 @@ userDefine	非值	1000
 userDefine	非终极符	1000
 userDefine	非主属性	1000
 userDefine	非阻塞交叉怀关	1000
-userDefine	费尔托斯特	1000
+userDefine	费尔托��特	1000
 userDefine	分安全	1000
 userDefine	分安全模式	1000
 userDefine	分包商	1000
@@ -2645,7 +2543,6 @@ userDefine	分单位切单位	1000
 userDefine	分段	1000
 userDefine	分段标志	1000
 userDefine	分段和	1000
-userDefine	分段确定性的	1000
 userDefine	分发版	1000
 userDefine	分发型业务	1000
 userDefine	分发应用	1000
@@ -2688,21 +2585,6 @@ userDefine	分散控制	1000
 userDefine	分散入	1000
 userDefine	分散式处理	1000
 userDefine	分散式数据处理	1000
-userDefine	分时	1000
-userDefine	分时操作系统	1000
-userDefine	分时处理	1000
-userDefine	分时等待方式	1000
-userDefine	分时调度程序系统	1000
-userDefine	分时调度则	1000
-userDefine	分时动态分配程序	1000
-userDefine	分时监控系统	1000
-userDefine	分时就绪方式	1000
-userDefine	分时控制任务	1000
-userDefine	分时驱动程序	1000
-userDefine	分时系统命令	1000
-userDefine	分时行方式	1000
-userDefine	分时用户方式	1000
-userDefine	分时优先级	1000
 userDefine	分析	1000
 userDefine	分析程序	1000
 userDefine	分析攻击	1000
@@ -2998,7 +2880,6 @@ userDefine	个体发生	1000
 userDefine	个性标	1000
 userDefine	个性时	1000
 userDefine	根编程序	1000
-userDefine	根据忆的	1000
 userDefine	根目录	1000
 userDefine	根文件夹	1000
 userDefine	更改控制	1000
@@ -3059,7 +2940,6 @@ userDefine	功法	1000
 userDefine	功分	1000
 userDefine	功符	1000
 userDefine	功故	1000
-userDefine	功关系的	1000
 userDefine	功耗	1000
 userDefine	功合伀法	1000
 userDefine	功件	1000
@@ -3520,9 +3400,6 @@ userDefine	合成器	1000
 userDefine	合成世界	1000
 userDefine	合成数字	1000
 userDefine	合导向型意网	1000
-userDefine	合的	1000
-userDefine	合法性撤消	1000
-userDefine	合法性取消	1000
 userDefine	合格性测	1000
 userDefine	合类	1000
 userDefine	合取查	1000
@@ -3579,7 +3456,6 @@ userDefine	候选键	1000
 userDefine	后备软盘	1000
 userDefine	后备系统	1000
 userDefine	后处理	1000
-userDefine	后的	1000
 userDefine	后端网	1000
 userDefine	后继标	1000
 userDefine	后继丛	1000
@@ -3682,33 +3558,6 @@ userDefine	怀发方法学	1000
 userDefine	怀发工具箱	1000
 userDefine	怀发环境模型	1000
 userDefine	怀发生存周期	1000
-userDefine	怀发约	1000
-userDefine	怀发展	1000
-userDefine	怀发者	1000
-userDefine	怀发者合同管理员	1000
-userDefine	怀发周期	1000
-userDefine	怀放	1000
-userDefine	怀放安全环境	1000
-userDefine	怀放的数据库接	1000
-userDefine	怀放软件	1000
-userDefine	怀放声系统	1000
-userDefine	怀放式图形库	1000
-userDefine	怀放体系结构框架	1000
-userDefine	怀放图形	1000
-userDefine	怀放图形库	1000
-userDefine	怀放系统	1000
-userDefine	怀放系统互	1000
-userDefine	怀放源码	1000
-userDefine	怀故	1000
-userDefine	怀关电流	1000
-userDefine	怀关时	1000
-userDefine	怀关枢纽	1000
-userDefine	怀关网格	1000
-userDefine	怀关箱	1000
-userDefine	怀关噪声	1000
-userDefine	怀环控制	1000
-userDefine	怀机查杀	1000
-userDefine	怀始符号	1000
 userDefine	怀始坐标	1000
 userDefine	坏扇区法	1000
 userDefine	环保总署	1000
@@ -3892,47 +3741,12 @@ userDefine	基底凸线	1000
 userDefine	基底型式	1000
 userDefine	基函数	1000
 userDefine	基朴	1000
-userDefine	基数的	1000
 userDefine	基数排序	1000
 userDefine	基网	1000
 userDefine	基线	1000
 userDefine	基页	1000
 userDefine	基因块假	1000
 userDefine	基于	1000
-userDefine	基于博弈协商	1000
-userDefine	基于代价的查优化	1000
-userDefine	基于法的查优化	1000
-userDefine	基于范例的推理	1000
-userDefine	基于构件的软件工程	1000
-userDefine	基于构件的软件怀发	1000
-userDefine	基于合伀的法	1000
-userDefine	基于合伀法	1000
-userDefine	基于划的协商	1000
-userDefine	基于类型理的方法	1000
-userDefine	基于逻的法	1000
-userDefine	基于面的表示	1000
-userDefine	基于内容的检索	1000
-userDefine	基于内容的图像检索	1000
-userDefine	基于实例	1000
-userDefine	基于特征的	1000
-userDefine	基于特征的逆向工程	1000
-userDefine	基于特征的造型	1000
-userDefine	基于特征的制造	1000
-userDefine	基于物理的造型	1000
-userDefine	基于义的查优化	1000
-userDefine	基于则	1000
-userDefine	基于则的程序	1000
-userDefine	基于则的系统	1000
-userDefine	基于则的演绎系统	1000
-userDefine	基于则的专家系统	1000
-userDefine	基于知	1000
-userDefine	基于知的答系统	1000
-userDefine	基于知的仿真系统	1000
-userDefine	基于知的机器翻	1000
-userDefine	基于知的咨系统	1000
-userDefine	基于主体	1000
-userDefine	基于资源的调度	1000
-userDefine	基址寄存器	1000
 userDefine	基准	1000
 userDefine	基准测	1000
 userDefine	基准程序	1000
@@ -4124,9 +3938,7 @@ userDefine	加线条	1000
 userDefine	加耀	1000
 userDefine	加载和存储体系结构	1000
 userDefine	甲骨文	1000
-userDefine	假的	1000
 userDefine	假冒攻击	1000
-userDefine	假色	1000
 userDefine	假通率	1000
 userDefine	假推理	1000
 userDefine	假脱机	1000
@@ -4511,13 +4323,6 @@ userDefine	经典逻	1000
 userDefine	经法则	1000
 userDefine	经济可行性	1000
 userDefine	经济模型	1000
-userDefine	经济信息系统	1000
-userDefine	经理信息系统	1000
-userDefine	经理支持系统	1000
-userDefine	经式句法剖析	1000
-userDefine	经系统	1000
-userDefine	经者格	1000
-userDefine	经知	1000
 userDefine	景色	1000
 userDefine	景色比例	1000
 userDefine	景图层	1000
@@ -4648,24 +4453,17 @@ userDefine	句法分析	1000
 userDefine	句法关系	1000
 userDefine	句法结构	1000
 userDefine	句法类别	1000
-userDefine	句法理	1000
-userDefine	句法模式别	1000
-userDefine	句法剖析的机方法	1000
 userDefine	句法歧义	1000
 userDefine	句法生成	1000
 userDefine	句法树	1000
 userDefine	句法意学	1000
 userDefine	句法义学	1000
-userDefine	句法则	1000
 userDefine	句法制导编程序	1000
 userDefine	句法制导编器	1000
 userDefine	句构法	1000
-userDefine	句核	1000
-userDefine	句平均长度	1000
 userDefine	句型	1000
 userDefine	句子	1000
 userDefine	句子产生器	1000
-userDefine	句子翻的	1000
 userDefine	句子片段	1000
 userDefine	句子歧义消除	1000
 userDefine	句子生成程序	1000
@@ -4734,82 +4532,14 @@ userDefine	科技	1000
 userDefine	科学数据库	1000
 userDefine	科学算可化	1000
 userDefine	科研计算工具	1000
-userDefine	壳站点	1000
-userDefine	可安备驱动程序	1000
-userDefine	可安入出程	1000
-userDefine	可安文件系统	1000
-userDefine	可安性	1000
-userDefine	可编程	1000
-userDefine	可编程控制算机	1000
-userDefine	可编程逻控制器	1000
-userDefine	可编程逻器件	1000
-userDefine	可编程逻阵列	1000
-userDefine	可编程通信接口	1000
-userDefine	可编程阵列逻	1000
-userDefine	可编程只存储器	1000
-userDefine	可变比特率	1000
-userDefine	可变比特率业务	1000
-userDefine	可变分区	1000
-userDefine	可变结构系统	1000
-userDefine	可变字长	1000
-userDefine	可标	1000
-userDefine	可标图	1000
-userDefine	可擦	1000
-userDefine	可测差	1000
-userDefine	可测性	1000
-userDefine	可察性	1000
-userDefine	可程序	1000
-userDefine	可承受险级	1000
-userDefine	可持续信元速率	1000
-userDefine	可穿戴算机	1000
-userDefine	可串行性	1000
-userDefine	可存取性	1000
-userDefine	可的营机构	1000
-userDefine	可点	1000
-userDefine	可调度性	1000
-userDefine	可调整	1000
-userDefine	可定位程序库模块	1000
-userDefine	可定位机器代码	1000
-userDefine	可定位库	1000
-userDefine	可断性	1000
-userDefine	可多形	1000
-userDefine	可分割的	1000
-userDefine	可分级性	1000
-userDefine	可分析的	1000
-userDefine	可分页动态区	1000
-userDefine	可分页分区	1000
-userDefine	可分页区域	1000
-userDefine	可服务时	1000
-userDefine	可服务性	1000
-userDefine	可复向	1000
-userDefine	可复性	1000
-userDefine	可复用构件	1000
-userDefine	可复用性	1000
-userDefine	可盖树	1000
-userDefine	可盖图	1000
-userDefine	可构系统	1000
-userDefine	可管理性	1000
-userDefine	可归约性	1000
-userDefine	可焊性	1000
-userDefine	可化	1000
 userDefine	可恢复性	1000
-userDefine	可检测性	1000
-userDefine	可靠性	1000
-userDefine	可靠性度	1000
-userDefine	可靠性分析	1000
-userDefine	可靠性工程	1000
-userDefine	可靠性价	1000
-userDefine	可靠性模型	1000
-userDefine	可靠性数据	1000
 userDefine	可靠性统	1000
 userDefine	可靠性增长	1000
 userDefine	可控制性	1000
-userDefine	可扩充的	1000
 userDefine	可扩充性	1000
 userDefine	可扩缩伀性接口	1000
 userDefine	可扩缩性	1000
 userDefine	可扩展	1000
-userDefine	可扩展的	1000
 userDefine	可扩展接	1000
 userDefine	可扩展性	1000
 userDefine	可扩展样式	1000
@@ -4851,7 +4581,6 @@ userDefine	可性函数	1000
 userDefine	可性理	1000
 userDefine	可修改性	1000
 userDefine	可移植	1000
-userDefine	可移植的操作系统	1000
 userDefine	可移植性	1000
 userDefine	可用性	1000
 userDefine	可用性模型	1000
@@ -4863,7 +4592,6 @@ userDefine	可转换签名	1000
 userDefine	克伀号	1000
 userDefine	克林包	1000
 userDefine	刻面	1000
-userDefine	客道	1000
 userDefine	客户	1000
 userDefine	客户对客户	1000
 userDefine	客户服务	1000
@@ -4973,7 +4701,6 @@ userDefine	快速消息	1000
 userDefine	快速选择	1000
 userDefine	快速以太网	1000
 userDefine	快速有序	1000
-userDefine	快速转到	1000
 userDefine	快照	1000
 userDefine	宽比	1000
 userDefine	宽磁道	1000
@@ -4995,7 +4722,6 @@ userDefine	窥孔优化	1000
 userDefine	昆腾	1000
 userDefine	扩充	1000
 userDefine	扩充槽	1000
-userDefine	扩充的工业标准结构	1000
 userDefine	扩充数据出	1000
 userDefine	扩充转移网	1000
 userDefine	扩充转移网络	1000
@@ -5056,7 +4782,6 @@ userDefine	冷却	1000
 userDefine	冷却剂	1000
 userDefine	冷站点	1000
 userDefine	离级	1000
-userDefine	离散的	1000
 userDefine	离散对数	1000
 userDefine	离散建	1000
 userDefine	离散卷积	1000
@@ -5152,7 +4877,6 @@ userDefine	亮度比	1000
 userDefine	亮而粗糙	1000
 userDefine	聊天	1000
 userDefine	料库	1000
-userDefine	料库为本的学习	1000
 userDefine	料库学	1000
 userDefine	料涂抹	1000
 userDefine	列表	1000
@@ -5456,21 +5180,17 @@ userDefine	面向程编程	1000
 userDefine	面向程模型	1000
 userDefine	面向代数	1000
 userDefine	面向对模型	1000
-userDefine	面向对向的程序	1000
 userDefine	面向对象	1000
 userDefine	面向对象编程	1000
 userDefine	面向对象表示	1000
 userDefine	面向对象操作系统	1000
 userDefine	面向对象测	1000
 userDefine	面向对象程序	1000
-userDefine	面向对象的	1000
-userDefine	面向对象的体系结构	1000
 userDefine	面向对象方法	1000
 userDefine	面向对象分析	1000
 userDefine	面向对象建模	1000
 userDefine	面向对象数据库	1000
 userDefine	面向对象数据模型	1000
-userDefine	面向分析的	1000
 userDefine	面向功层次模型	1000
 userDefine	面向构件编程	1000
 userDefine	面向合型意网	1000
@@ -5478,14 +5198,10 @@ userDefine	面向机器	1000
 userDefine	面向接	1000
 userDefine	面向接口编程	1000
 userDefine	面向接协	1000
-userDefine	面向控制的体系结构	1000
-userDefine	面向配的	1000
-userDefine	面向数据结构的方法	1000
 userDefine	面向应用	1000
 userDefine	面向用户	1000
 userDefine	面向用户测	1000
 userDefine	面向知体系结构	1000
-userDefine	面向制造的	1000
 userDefine	面向主体	1000
 userDefine	面向字符协	1000
 userDefine	面消除	1000
@@ -5661,8 +5377,6 @@ userDefine	目标算机	1000
 userDefine	目标系统	1000
 userDefine	目标引导行为	1000
 userDefine	目标子句	1000
-userDefine	目的	1000
-userDefine	目的地址	1000
 userDefine	目录服务	1000
 userDefine	目录排序	1000
 userDefine	奈奎斯特样率	1000
@@ -5750,7 +5464,6 @@ userDefine	逆网	1000
 userDefine	逆向工程	1000
 userDefine	逆向删略	1000
 userDefine	逆抑制	1000
-userDefine	年提出的	1000
 userDefine	年在	1000
 userDefine	凝结性粘着性	1000
 userDefine	凝聚	1000
@@ -6002,8 +5715,6 @@ userDefine	启用图层板	1000
 userDefine	启用文本滤	1000
 userDefine	器件	1000
 userDefine	气冷	1000
-userDefine	气息的	1000
-userDefine	恰当的	1000
 userDefine	恰当盖	1000
 userDefine	牵引式纸器	1000
 userDefine	千千静听	1000
@@ -6584,54 +6295,7 @@ userDefine	肉鸡	1000
 userDefine	蠕虫	1000
 userDefine	蠕虫王蠕虫	1000
 userDefine	蠕虫下载器	1000
-userDefine	如影形学	1000
-userDefine	入伀行	1000
-userDefine	入备	1000
-userDefine	入程	1000
-userDefine	入程序	1000
-userDefine	入出	1000
-userDefine	入出备	1000
-userDefine	入出备指派	1000
-userDefine	入出处理器	1000
-userDefine	入出队列	1000
-userDefine	入出管理	1000
-userDefine	入出接口	1000
-userDefine	入出适配器	1000
-userDefine	入错率	1000
-userDefine	入带	1000
-userDefine	入点	1000
-userDefine	入度	1000
-userDefine	入断	1000
-userDefine	入法	1000
-userDefine	入方式转换键	1000
-userDefine	入符号	1000
-userDefine	入呼叫	1000
-userDefine	入监督码	1000
-userDefine	入例程	1000
-userDefine	入流	1000
-userDefine	入脉冲	1000
-userDefine	入模	1000
-userDefine	入模块	1000
-userDefine	入模式	1000
-userDefine	入平台	1000
-userDefine	入侵检测系统	1000
-userDefine	入侵者	1000
-userDefine	入射电压	1000
-userDefine	入事件	1000
-userDefine	入数据	1000
-userDefine	入速率	1000
-userDefine	入特性	1000
-userDefine	入文本	1000
-userDefine	入文本类型	1000
-userDefine	入文件	1000
-userDefine	入依赖	1000
-userDefine	入映射	1000
-userDefine	入优先级	1000
-userDefine	入原	1000
-userDefine	入字	1000
-userDefine	入字母表	1000
-userDefine	入阻抗	1000
-userDefine	软差错	1000
+userDefine	如影形学	1000userDefine	软差错	1000
 userDefine	软磁盘	1000
 userDefine	软故	1000
 userDefine	软件	1000
@@ -6720,7 +6384,6 @@ userDefine	软件资源	1000
 userDefine	软件总线	1000
 userDefine	软接	1000
 userDefine	软盘	1000
-userDefine	软盘储存档案的基本单位	1000
 userDefine	软盘抖动	1000
 userDefine	软盘驱动器	1000
 userDefine	软盘套	1000
@@ -6882,8 +6545,6 @@ userDefine	上传收内容	1000
 userDefine	上传在线收	1000
 userDefine	上次滤镜操作	1000
 userDefine	上次页面	1000
-userDefine	上的多协	1000
-userDefine	上的网际协	1000
 userDefine	上滚伀页	1000
 userDefine	上确界	1000
 userDefine	上升时	1000
@@ -6894,7 +6555,6 @@ userDefine	上推队列	1000
 userDefine	上推排序	1000
 userDefine	上网行为监控管理系统	1000
 userDefine	上位	1000
-userDefine	上位的	1000
 userDefine	上下位关系	1000
 userDefine	上下文	1000
 userDefine	上下文分析	1000
@@ -6909,7 +6569,6 @@ userDefine	上下文有关	1000
 userDefine	上下文有关文法	1000
 userDefine	上下文中关键	1000
 userDefine	上行	1000
-userDefine	上行的操作系统	1000
 userDefine	上行数据流	1000
 userDefine	上载	1000
 userDefine	舌前	1000
@@ -7039,7 +6698,6 @@ userDefine	时步	1000
 userDefine	时槽	1000
 userDefine	时常数	1000
 userDefine	时戳	1000
-userDefine	时到文本	1000
 userDefine	时叠	1000
 userDefine	时动作研究	1000
 userDefine	时段法学	1000
@@ -7233,7 +6891,6 @@ userDefine	收面版	1000
 userDefine	手动查杀	1000
 userDefine	手动入	1000
 userDefine	手动入键	1000
-userDefine	手段目的分析	1000
 userDefine	手机	1000
 userDefine	手机安全	1000
 userDefine	手机操作系统	1000
@@ -7277,7 +6934,6 @@ userDefine	受限禁区	1000
 userDefine	受限逻法	1000
 userDefine	受信任程序	1000
 userDefine	受益格	1000
-userDefine	受阻的	1000
 userDefine	枢轴法	1000
 userDefine	输入法	1000
 userDefine	书废除	1000
@@ -7425,7 +7081,6 @@ userDefine	数学公式	1000
 userDefine	数学归纳	1000
 userDefine	数学计算	1000
 userDefine	数学形态学	1000
-userDefine	数值到大写	1000
 userDefine	数值积分	1000
 userDefine	数值精度	1000
 userDefine	数值属性	1000
@@ -7485,7 +7140,6 @@ userDefine	双处理器	1000
 userDefine	双唇	1000
 userDefine	双带图灵机	1000
 userDefine	双带有穷动机	1000
-userDefine	双的	1000
 userDefine	双对齐	1000
 userDefine	双分支	1000
 userDefine	双份编码	1000
@@ -7913,7 +7567,6 @@ userDefine	同步并行算法	1000
 userDefine	同步操作	1000
 userDefine	同步传	1000
 userDefine	同步传送模式	1000
-userDefine	同步的	1000
 userDefine	同步多媒体成	1000
 userDefine	同步方法	1000
 userDefine	同步和会聚功	1000
@@ -7937,11 +7590,9 @@ userDefine	同区分	1000
 userDefine	同时性	1000
 userDefine	同态	1000
 userDefine	同位	1000
-userDefine	同位的	1000
 userDefine	同位结构	1000
 userDefine	同位素	1000
 userDefine	同位位	1000
-userDefine	同心的	1000
 userDefine	同形	1000
 userDefine	同形现象	1000
 userDefine	同形异义	1000
@@ -8022,7 +7673,6 @@ userDefine	图层	1000
 userDefine	图层剪贴径	1000
 userDefine	图层径	1000
 userDefine	图层内容选项	1000
-userDefine	图的遍历	1000
 userDefine	图像逼真	1000
 userDefine	图像逼真度	1000
 userDefine	图像编码	1000
@@ -8206,7 +7856,6 @@ userDefine	网格曲面	1000
 userDefine	网格生成	1000
 userDefine	网购	1000
 userDefine	网关	1000
-userDefine	网关到网关协	1000
 userDefine	网管工具	1000
 userDefine	网合成	1000
 userDefine	网化简	1000
@@ -8341,7 +7990,6 @@ userDefine	微内核	1000
 userDefine	微内核操作系统	1000
 userDefine	微任务化	1000
 userDefine	微软	1000
-userDefine	微软的	1000
 userDefine	微型算机	1000
 userDefine	微学	1000
 userDefine	微指令	1000
@@ -8498,7 +8146,6 @@ userDefine	文件创建	1000
 userDefine	文件存储器	1000
 userDefine	文件存取	1000
 userDefine	文件大小	1000
-userDefine	文件到单元格	1000
 userDefine	文件地址	1000
 userDefine	文件定义	1000
 userDefine	文件分段	1000
@@ -8552,7 +8199,6 @@ userDefine	纹理分割	1000
 userDefine	纹理化	1000
 userDefine	纹理图像	1000
 userDefine	纹理映射	1000
-userDefine	稳定的排序算法	1000
 userDefine	稳定度	1000
 userDefine	稳定化协	1000
 userDefine	稳定时	1000
@@ -8658,7 +8304,6 @@ userDefine	析取范式	1000
 userDefine	西游木马	1000
 userDefine	吸墨性	1000
 userDefine	吸锡器	1000
-userDefine	息为本的格位法	1000
 userDefine	希捷	1000
 userDefine	希捷科技	1000
 userDefine	席执行官	1000
@@ -8898,7 +8543,6 @@ userDefine	陷阱	1000
 userDefine	限定	1000
 userDefine	限定推理	1000
 userDefine	限制	1000
-userDefine	限制条件的传递限定因素增殖	1000
 userDefine	限制图像	1000
 userDefine	线编码	1000
 userDefine	线表	1000
@@ -8979,7 +8623,6 @@ userDefine	相位度	1000
 userDefine	相信	1000
 userDefine	相信逻	1000
 userDefine	箱测	1000
-userDefine	想打	1000
 userDefine	响应	1000
 userDefine	响应窗口	1000
 userDefine	响应分析	1000
@@ -9063,7 +8706,6 @@ userDefine	小应用程序	1000
 userDefine	小种	1000
 userDefine	小组	1000
 userDefine	校对系统	1000
-userDefine	校和	1000
 userDefine	校样色	1000
 userDefine	校正控制	1000
 userDefine	校正信号	1000
@@ -9071,7 +8713,6 @@ userDefine	校状态	1000
 userDefine	笑广场	1000
 userDefine	笑话	1000
 userDefine	效处理	1000
-userDefine	效性的	1000
 userDefine	效应	1000
 userDefine	歇故	1000
 userDefine	协处理器	1000
@@ -9129,7 +8770,6 @@ userDefine	写出所有缓存	1000
 userDefine	写出文本	1000
 userDefine	写串扰	1000
 userDefine	写磁头	1000
-userDefine	写到内存	1000
 userDefine	写更新协	1000
 userDefine	写广播	1000
 userDefine	写后	1000
@@ -9698,9 +9338,6 @@ userDefine	依存关系树	1000
 userDefine	依存结构	1000
 userDefine	依赖	1000
 userDefine	依赖保持	1000
-userDefine	依赖的盖	1000
-userDefine	依赖的栀小盖	1000
-userDefine	依赖的栀优盖	1000
 userDefine	依赖方	1000
 userDefine	依赖弧	1000
 userDefine	依赖图	1000
@@ -9716,8 +9353,6 @@ userDefine	遗传学习	1000
 userDefine	遗留类	1000
 userDefine	遗忘因子	1000
 userDefine	移出	1000
-userDefine	移到文件	1000
-userDefine	移到文件尾	1000
 userDefine	移动	1000
 userDefine	移动代理	1000
 userDefine	移动机器人	1000
@@ -9745,7 +9380,6 @@ userDefine	已怀文件	1000
 userDefine	已配准图像	1000
 userDefine	已文件	1000
 userDefine	已知明文攻击	1000
-userDefine	以例句为本的机器翻	1000
 userDefine	以太网	1000
 userDefine	以太网交换机	1000
 userDefine	抑止弧	1000
@@ -9754,7 +9388,6 @@ userDefine	易度值	1000
 userDefine	易管理性	1000
 userDefine	易扩充性	1000
 userDefine	易扩缩性	1000
-userDefine	易扩展的	1000
 userDefine	易扩展性	1000
 userDefine	易失性存储器	1000
 userDefine	易失性检查点	1000
@@ -9781,7 +9414,6 @@ userDefine	意向锁	1000
 userDefine	意向系统	1000
 userDefine	意学	1000
 userDefine	意义域	1000
-userDefine	意愿的	1000
 userDefine	忆保持度	1000
 userDefine	忆表示	1000
 userDefine	忆组织包	1000
@@ -9944,7 +9576,6 @@ userDefine	萤火虫木马	1000
 userDefine	荧光数码管	1000
 userDefine	影碟	1000
 userDefine	影视	1000
-userDefine	影响的	1000
 userDefine	硬磁盘	1000
 userDefine	硬错	1000
 userDefine	硬故	1000
@@ -10102,8 +9733,6 @@ userDefine	有穷动机栀小化	1000
 userDefine	有穷性	1000
 userDefine	有穷转向下推动机	1000
 userDefine	有穷状态系统	1000
-userDefine	有入口的合用户群	1000
-userDefine	有生的	1000
 userDefine	有失真图像	1000
 userDefine	有失真图像压缩	1000
 userDefine	有损压缩	1000
@@ -10143,7 +9772,6 @@ userDefine	有效字符	1000
 userDefine	有效字数	1000
 userDefine	有序搜索	1000
 userDefine	有源底板	1000
-userDefine	有仲的新组	1000
 userDefine	友元	1000
 userDefine	右击	1000
 userDefine	右键	1000
@@ -10153,7 +9781,6 @@ userDefine	右匹配	1000
 userDefine	右下横坐标	1000
 userDefine	右线性文法	1000
 userDefine	右移	1000
-userDefine	又称	1000
 userDefine	逾限	1000
 userDefine	逾限控制	1000
 userDefine	娱乐	1000
@@ -10166,25 +9793,13 @@ userDefine	语音工具	1000
 userDefine	语音合成和处理	1000
 userDefine	域分	1000
 userDefine	域分类则	1000
-userDefine	域工程师	1000
-userDefine	域际策略由选择	1000
-userDefine	域建模	1000
 userDefine	域名	1000
 userDefine	域名服务	1000
 userDefine	域名服务器	1000
 userDefine	域名控制器	1000
-userDefine	域名析	1000
 userDefine	域名系统	1000
 userDefine	域名做析	1000
 userDefine	域模型	1000
-userDefine	域算	1000
-userDefine	域外元	1000
-userDefine	域无关	1000
-userDefine	域无关则	1000
-userDefine	域相关	1000
-userDefine	域依存性域依存关系	1000
-userDefine	域约	1000
-userDefine	域知	1000
 userDefine	域主体	1000
 userDefine	域专家	1000
 userDefine	域专指性	1000
@@ -10235,7 +9850,6 @@ userDefine	圆片模成	1000
 userDefine	圆扫描	1000
 userDefine	源程序	1000
 userDefine	源代码	1000
-userDefine	源到源转换	1000
 userDefine	源地址	1000
 userDefine	源典	1000
 userDefine	源范例库	1000
@@ -10338,7 +9952,6 @@ userDefine	暂存器寄存器资科学	1000
 userDefine	暂时故	1000
 userDefine	暂停	1000
 userDefine	暂停状态	1000
-userDefine	暂用的	1000
 userDefine	暂驻命令	1000
 userDefine	赞助傲游	1000
 userDefine	早期失效	1000
@@ -10361,7 +9974,6 @@ userDefine	增加杂点	1000
 userDefine	增精化	1000
 userDefine	增强	1000
 userDefine	增强查找	1000
-userDefine	增强的	1000
 userDefine	增强现实	1000
 userDefine	增强型小备接口	1000
 userDefine	增强右键单	1000
@@ -10375,7 +9987,6 @@ userDefine	栅格数据结构	1000
 userDefine	栅同步	1000
 userDefine	炸弹蠕虫	1000
 userDefine	摘算法	1000
-userDefine	粘贴到光标处	1000
 userDefine	粘着素	1000
 userDefine	粘着位	1000
 userDefine	栈标	1000
@@ -10535,61 +10146,6 @@ userDefine	支持软件	1000
 userDefine	支持系统	1000
 userDefine	支付宝	1000
 userDefine	支站	1000
-userDefine	知编	1000
-userDefine	知编器	1000
-userDefine	知表示	1000
-userDefine	知表示方式	1000
-userDefine	知操作化	1000
-userDefine	知查操纵	1000
-userDefine	知产业	1000
-userDefine	知程	1000
-userDefine	知处理	1000
-userDefine	知单元	1000
-userDefine	知发现	1000
-userDefine	知仿真	1000
-userDefine	知复杂性	1000
-userDefine	知工程	1000
-userDefine	知工程师	1000
-userDefine	知机	1000
-userDefine	知交互式	1000
-userDefine	知交互式明系统	1000
-userDefine	知结构	1000
-userDefine	知精化	1000
-userDefine	知科学	1000
-userDefine	知库	1000
-userDefine	知库管理系统	1000
-userDefine	知库机	1000
-userDefine	知库系统	1000
-userDefine	知块	1000
-userDefine	知利用系统	1000
-userDefine	知密型产业	1000
-userDefine	知密型生产	1000
-userDefine	知明	1000
-userDefine	知模式	1000
-userDefine	知模型	1000
-userDefine	知取	1000
-userDefine	知冗余	1000
-userDefine	知提取	1000
-userDefine	知提取器	1000
-userDefine	知同化	1000
-userDefine	知图像编码	1000
-userDefine	知推理	1000
-userDefine	知为本之机器翻	1000
-userDefine	知习得	1000
-userDefine	知系统	1000
-userDefine	知相容性	1000
-userDefine	知心理学	1000
-userDefine	知信息处理	1000
-userDefine	知信息处理系统	1000
-userDefine	知信息格式	1000
-userDefine	知学	1000
-userDefine	知引导数据库	1000
-userDefine	知映射	1000
-userDefine	知映像系统	1000
-userDefine	知源	1000
-userDefine	知主管	1000
-userDefine	知主体	1000
-userDefine	知子系统	1000
 userDefine	知组织	1000
 userDefine	知撷取知取	1000
 userDefine	职责分怀	1000
@@ -10640,8 +10196,6 @@ userDefine	址传	1000
 userDefine	指标	1000
 userDefine	指称对象	1000
 userDefine	指称义	1000
-userDefine	指到文本	1000
-userDefine	指到字	1000
 userDefine	指令	1000
 userDefine	指令步	1000
 userDefine	指令处理	1000
@@ -10913,7 +10467,6 @@ userDefine	主保护	1000
 userDefine	主持人	1000
 userDefine	主从调度	1000
 userDefine	主从复制	1000
-userDefine	主从结构的	1000
 userDefine	主从式操作系统	1000
 userDefine	主从算机	1000
 userDefine	主存	1000
@@ -10921,7 +10474,6 @@ userDefine	主存储器	1000
 userDefine	主存储器分区	1000
 userDefine	主存数据库	1000
 userDefine	主存栈	1000
-userDefine	主的	1000
 userDefine	主调度程序	1000
 userDefine	主动	1000
 userDefine	主动查	1000
@@ -11245,9 +10797,7 @@ userDefine	组短	1000
 userDefine	组合	1000
 userDefine	组合策略	1000
 userDefine	组合磁头	1000
-userDefine	组合的	1000
 userDefine	组合范畴法	1000
-userDefine	组合关系结构段的	1000
 userDefine	组合逻电	1000
 userDefine	组合逻综合	1000
 userDefine	组合曲面	1000
@@ -11326,7 +10876,6 @@ userDefine	栀低保护	1000
 userDefine	栀短径	1000
 userDefine	栀短作业优先法	1000
 userDefine	栀广合伀子	1000
-userDefine	栀好用的	1000
 userDefine	栀后优先级	1000
 userDefine	栀坏	1000
 userDefine	栀坏模式测	1000

@@ -17,9 +17,9 @@ public class ToAnalysisTest {
 		long start = System.currentTimeMillis();
 		StringBuilder sb =  new StringBuilder() ;
 		while ((next = toAnalysis.next()) != null) {
-			System.out.println(next.getName() + ":" + next.maxNature);
-			sb.append(next.getName()+":"+next.maxNature+"/ ") ;
+			sb.append(next.getName()+":"+next.maxNature+"/ "+next.getOffe()) ;
 			sb.append("\n") ;
+			System.out.println(next.getName()+":"+next.getOffe());
 		}
 		System.out.println(System.currentTimeMillis() - start);
 		IOUtil.Writer("/Users/ansj/Documents/快盘/冒死.txt", "UTF-8", sb.toString()) ;

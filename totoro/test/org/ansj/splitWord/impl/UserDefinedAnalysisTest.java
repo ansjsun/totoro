@@ -21,7 +21,7 @@ public class UserDefinedAnalysisTest {
 //			System.out.println(next.getName() + ":" + next.maxNature);
 //			sb.append(next.getName()+":"+next.maxNature+"/ ") ;
 //			sb.append("\n") ;
-			if(next.maxNature==NatureEnum.userDefine)
+//			if(next.maxNature==NatureEnum.userDefine)
 			System.out.println(next.getName()+":"+next.getOffe());
 		}
 		System.out.println(System.currentTimeMillis() - start);

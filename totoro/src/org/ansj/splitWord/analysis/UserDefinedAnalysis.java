@@ -93,7 +93,7 @@ public class UserDefinedAnalysis implements Analysis{
 		for (int i = 0; i < maxFrontWordList.size(); i++) {
 			segement = maxFrontWordList.get(i);
 			if (segement.getNatureEnum() != null) {
-				terms.add(new Term(segement.getValue(), segement.getOffe() + i, segement.getNatureEnum()));
+				terms.add(new Term(segement.getValue(), segement.getOffe()+offe + i, segement.getNatureEnum()));
 			} else {
 				toAnalysis = new ToAnalysis(segement.getValue(), isNameRe);
 				while ((term = toAnalysis.next()) != null) {

@@ -21,10 +21,8 @@ public class Graph {
 	private Term root = null;
 	private static final String E = "E";
 	private static final String B = "B";
-	private int baseOffe ;
 
-	public Graph(String str,int baseOffe) {
-		this.baseOffe = baseOffe ;
+	public Graph(String str) {
 		int size = str.length() ;
 		terms = new Term[size + 1][1];
 		end = new Term(E, size, 1, null, NatureEnum.NULL);
@@ -171,7 +169,6 @@ public class Graph {
 			LinkedList<Term> result = new LinkedList<Term>();
 			Term term = end;
 			while ((term = term.getMaxFrom()) != null) {
-				term.UpdateOffe(baseOffe) ;
 				result.addFirst(term);
 			}
 			return result;

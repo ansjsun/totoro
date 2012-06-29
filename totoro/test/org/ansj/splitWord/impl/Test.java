@@ -83,7 +83,7 @@ public class Test {
 					GetWordsImpl gwi = new GetWordsImpl();
 					gwi.setStr(str);
 					String temp= null;
-					Graph gp = new Graph(str,0) ;
+					Graph gp = new Graph(str) ;
 					while((temp=gwi.allWords())!=null){
 						gp.addTerm(new Term(temp,gwi.offe,gwi.getWeight(),gwi.getNatures(),gwi.getMaxNature())) ;
 					}

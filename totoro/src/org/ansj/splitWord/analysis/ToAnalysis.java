@@ -79,10 +79,13 @@ public class ToAnalysis {
 	 * @return
 	 * @throws IOException
 	 */
+	private Term term = null ;
 	public Term next() throws IOException {
 
 		if (!terms.isEmpty()) {
-			return terms.poll();
+			term = terms.poll() ;
+			term.updateOffe(offe) ;
+			return term ;
 		}
 
 		String temp = br.readLine();
@@ -102,7 +105,9 @@ public class ToAnalysis {
 		analysis(temp);
 
 		if (!terms.isEmpty()) {
-			return terms.poll();
+			term = terms.poll() ;
+			term.updateOffe(offe) ;
+			return term;
 		}
 
 		return null;
@@ -124,10 +129,10 @@ public class ToAnalysis {
 		for (int i = 0; i < length; i++) {
 			switch (status[temp.charAt(i)]) {
 			case 0:
-				terms.add(new Term(temp.charAt(i) + "", i + offe, NatureEnum.NULL));
+				terms.add(new Term(temp.charAt(i) + "", i , NatureEnum.NULL));
 				break;
 			case 3:
-				terms.add(new Term(temp.charAt(i) + "", i + offe, natures[temp.charAt(i)].maxNature));
+				terms.add(new Term(temp.charAt(i) + "", i , natures[temp.charAt(i)].maxNature));
 				start = i;
 				end = start;
 				break;
@@ -138,7 +143,7 @@ public class ToAnalysis {
 					end++;
 				}
 				str = WordAlert.alertEnglish(temp, start, end);
-				terms.add(new Term(str, start + offe, NatureEnum.en));
+				terms.add(new Term(str, start , NatureEnum.en));
 				i--;
 				break;
 			case 5:
@@ -148,7 +153,7 @@ public class ToAnalysis {
 					end++;
 				}
 				str = WordAlert.alertNumber(temp, start, end);
-				terms.add(new Term(str, start + offe, NatureEnum.nb));
+				terms.add(new Term(str, start , NatureEnum.nb));
 				i--;
 				break;
 			default:
@@ -163,7 +168,7 @@ public class ToAnalysis {
 				}
 				str = temp.substring(start, end);
 				gwi.setStr(str);
-				Graph gp = new Graph(str, offe + start);
+				Graph gp = new Graph(str);
 				while ((str = gwi.allWords()) != null) {
 					gp.addTerm(new Term(str, gwi.offe, gwi.getWeight(), gwi.getNatures(), gwi.getMaxNature()));
 				}

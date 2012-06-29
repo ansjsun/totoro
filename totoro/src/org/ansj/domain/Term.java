@@ -137,4 +137,13 @@ public class Term {
 		return this ;
 	}
 
+	/**
+	 * 更新偏移量
+	 * @param offe
+	 */
+	public void updateOffe(int offe) {
+		// TODO Auto-generated method stub
+		this.offe += offe ;
+	}
+
 }
