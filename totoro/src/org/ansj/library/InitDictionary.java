@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.ansj.domain.Natures;
 import org.ansj.util.IOUtil;
 import org.ansj.util.MyStaticValue;
+import org.ansj.util.StringUtil;
 
 public class InitDictionary {
 	/**
@@ -127,6 +128,9 @@ public class InitDictionary {
 	 */
 	public static boolean isInSystemDic(String str){
 		init() ;
+		if(StringUtil.isBlank(str)){
+			return true ;
+		}
 		int baseValue = str.charAt(0) ;
 		int checkValue = 0 ;
 		for (int i = 1; i < str.length(); i++) {

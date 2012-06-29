@@ -22,7 +22,7 @@ public class UserDefinedAnalysisTest {
 //			sb.append(next.getName()+":"+next.maxNature+"/ ") ;
 //			sb.append("\n") ;
 			if(next.maxNature==NatureEnum.userDefine)
-			System.out.println(next.getName());
+			System.out.println(next.getName()+":"+next.getOffe());
 		}
 		System.out.println(System.currentTimeMillis() - start);
 //		IOUtil.Writer("/Users/ansj/Documents/快盘/冒死.txt", "UTF-8", sb.toString()) ;
