@@ -7,16 +7,17 @@ import java.io.Reader;
 
 import org.ansj.domain.Term;
 import org.ansj.splitWord.analysis.FilterAnalysis;
+import org.ansj.splitWord.analysis.UserDefinedAnalysis;
 
 public class FilterAnalysisText {
 	public static void main(String[] args) throws IOException {
 		Reader reader = new InputStreamReader(new FileInputStream("/Users/ansj/Documents/快盘/冒死记录中国神秘事件（真全本）.txt"), "GBK");
-		FilterAnalysis toAnalysis = new FilterAnalysis(reader, true);
+		FilterAnalysis toAnalysis = new FilterAnalysis(new UserDefinedAnalysis(reader, true));
 		Term next = null;
 		long start = System.currentTimeMillis();
 		StringBuilder sb = new StringBuilder();
 		while ((next = toAnalysis.next()) != null) {
-//			System.out.println(next.getName() + ":" + next.maxNature);
+			System.out.println(next.getName() + ":" + next.maxNature);
 //			sb.append(next.getName() + ":" + next.maxNature);
 //			sb.append("\n");
 		}

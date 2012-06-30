@@ -11,6 +11,7 @@ import java.util.LinkedList;
 
 import org.ansj.domain.Term;
 import org.ansj.library.NatureEnum;
+import org.ansj.splitWord.Analysis;
 import org.ansj.splitWord.impl.GetWordsImpl;
 import org.ansj.util.Graph;
 import org.ansj.util.StringUtil;
@@ -22,7 +23,7 @@ import org.ansj.util.WordAlert;
  * @author ansj
  * 
  */
-public class ToAnalysis {
+public class ToAnalysis implements Analysis {
 
 	/**
 	 * 用来记录偏移量
@@ -33,14 +34,12 @@ public class ToAnalysis {
 	 * 记录上一次文本长度
 	 */
 	private int tempLength;
-	
+
 	/**
 	 * 是否识别人名
 	 */
-	private boolean isNameRe ;
-	
-	
-	
+	private boolean isNameRe;
+
 	/**
 	 * 分词的类
 	 */
@@ -65,11 +64,10 @@ public class ToAnalysis {
 	 * 
 	 * @param reader
 	 */
-	public ToAnalysis(Reader reader , boolean isNameRe) {
+	public ToAnalysis(Reader reader, boolean isNameRe) {
 		br = new BufferedReader(reader);
-		this.isNameRe = isNameRe ; 
+		this.isNameRe = isNameRe;
 	}
-	
 
 	private LinkedList<Term> terms = new LinkedList<Term>();
 
@@ -79,13 +77,14 @@ public class ToAnalysis {
 	 * @return
 	 * @throws IOException
 	 */
-	private Term term = null ;
+	private Term term = null;
+
 	public Term next() throws IOException {
 
 		if (!terms.isEmpty()) {
-			term = terms.poll() ;
-			term.updateOffe(offe) ;
-			return term ;
+			term = terms.poll();
+			term.updateOffe(offe);
+			return term;
 		}
 
 		String temp = br.readLine();
@@ -105,8 +104,8 @@ public class ToAnalysis {
 		analysis(temp);
 
 		if (!terms.isEmpty()) {
-			term = terms.poll() ;
-			term.updateOffe(offe) ;
+			term = terms.poll();
+			term.updateOffe(offe);
 			return term;
 		}
 
@@ -129,10 +128,10 @@ public class ToAnalysis {
 		for (int i = 0; i < length; i++) {
 			switch (status[temp.charAt(i)]) {
 			case 0:
-				terms.add(new Term(temp.charAt(i) + "", i , NatureEnum.NULL));
+				terms.add(new Term(temp.charAt(i) + "", i, NatureEnum.NULL));
 				break;
 			case 3:
-				terms.add(new Term(temp.charAt(i) + "", i , natures[temp.charAt(i)].maxNature));
+				terms.add(new Term(temp.charAt(i) + "", i, natures[temp.charAt(i)].maxNature));
 				start = i;
 				end = start;
 				break;
@@ -143,7 +142,7 @@ public class ToAnalysis {
 					end++;
 				}
 				str = WordAlert.alertEnglish(temp, start, end);
-				terms.add(new Term(str, start , NatureEnum.en));
+				terms.add(new Term(str, start, NatureEnum.en));
 				i--;
 				break;
 			case 5:
@@ -153,7 +152,7 @@ public class ToAnalysis {
 					end++;
 				}
 				str = WordAlert.alertNumber(temp, start, end);
-				terms.add(new Term(str, start , NatureEnum.nb));
+				terms.add(new Term(str, start, NatureEnum.nb));
 				i--;
 				break;
 			default:
@@ -172,9 +171,9 @@ public class ToAnalysis {
 				while ((str = gwi.allWords()) != null) {
 					gp.addTerm(new Term(str, gwi.offe, gwi.getWeight(), gwi.getNatures(), gwi.getMaxNature()));
 				}
-				if(isNameRe){
+				if (isNameRe) {
 					terms.addAll(gp.getPath().merger(2).mergerName());
-				}else{
+				} else {
 					terms.addAll(gp.getPath().merger(2).getResultLinked());
 				}
 				if (i < length) {
@@ -185,5 +184,4 @@ public class ToAnalysis {
 		}
 	}
 
-	
 }

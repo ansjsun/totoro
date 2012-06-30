@@ -1,18 +1,18 @@
 package org.ansj.splitWord.analysis;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.HashSet;
 
 import org.ansj.domain.Term;
+import org.ansj.splitWord.Analysis;
 import org.ansj.util.filter.StopWord;
 
-public class FilterAnalysis extends ToAnalysis {
+public class FilterAnalysis  {
 
-	HashSet<String> hs = new HashSet<String>();
+	private HashSet<String> hs = new HashSet<String>();
 
+	private Analysis analysis = null ;
 	/**
 	 * 带有停用词过滤的
 	 * 
@@ -21,8 +21,8 @@ public class FilterAnalysis extends ToAnalysis {
 	 * @param hs
 	 *            用户自定义停用词的hashSet
 	 */
-	public FilterAnalysis(Reader reader, boolean isNameRe, HashSet<String> hs) {
-		super(reader, isNameRe);
+	public FilterAnalysis(Analysis analysis, HashSet<String> hs) {
+		this.analysis = analysis ;
 		this.hs = hs;
 	}
 
@@ -32,17 +32,16 @@ public class FilterAnalysis extends ToAnalysis {
 	 * @param reader
 	 * @param isNameRe
 	 */
-	public FilterAnalysis(Reader reader, boolean isNameRe) {
-		super(reader, isNameRe);
+	public FilterAnalysis(Analysis analysis) {
+		this.analysis = analysis ;
 		this.hs = StopWord.getFilterSet();
 	}
 
-	@Override
 	public Term next() throws IOException {
 		// TODO Auto-generated method stub
-		Term term = super.next();
+		Term term = analysis.next();
 		while (hs.contains(term.getName())) {
-			term = super.next();
+			term = analysis.next();
 			if (term == null) {
 				return null;
 			}
