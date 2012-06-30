@@ -13,7 +13,13 @@ import org.ansj.splitWord.Analysis;
 import org.ansj.splitWord.impl.UserDefinedGetWords;
 import org.ansj.util.StringUtil;
 
-public class UserDefinedAnalysis implements Analysis{
+/**
+ * 用户自定义词典+基本分词+人名识别(顺序是先用户自定义词典.因为是正向最大匹配.所以这个不建议增加太多)
+ * 
+ * @author ansj
+ * 
+ */
+public class UserDefinedAnalysis implements Analysis {
 
 	/**
 	 * 用户自定义词典
@@ -93,7 +99,7 @@ public class UserDefinedAnalysis implements Analysis{
 		for (int i = 0; i < maxFrontWordList.size(); i++) {
 			segement = maxFrontWordList.get(i);
 			if (segement.getNatureEnum() != null) {
-				terms.add(new Term(segement.getValue(), segement.getOffe()+offe + i, segement.getNatureEnum()));
+				terms.add(new Term(segement.getValue(), segement.getOffe() + offe + i, segement.getNatureEnum()));
 			} else {
 				toAnalysis = new ToAnalysis(segement.getValue(), isNameRe);
 				while ((term = toAnalysis.next()) != null) {

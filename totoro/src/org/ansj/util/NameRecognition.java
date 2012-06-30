@@ -71,12 +71,6 @@ public class NameRecognition {
 	// }
 	//
 	// }
-	private static final HashSet<NatureEnum> hs = new HashSet<NatureEnum>();
-	static {
-		hs.add(NatureEnum.n);
-		hs.add(NatureEnum.NULL);
-		hs.add(NatureEnum.nr2);
-	}
 
 	public static LinkedList<Term> recognition(List<Term> list) {
 
@@ -88,35 +82,117 @@ public class NameRecognition {
 		int size = list.size();
 		for (int i = 0; i < size; i++) {
 			term = list.get(i);
-			if (term.getName().length() > 2) {
+			if (!isB(term)) {
 				result.add(term);
 				continue;
 			}
-			if (term.maxNature == NatureEnum.nr1 && i < size - 1) {
+
+			switch (size - i) {
+			case 1:
+				result.add(term);
+				return result;
+			case 2:
 				term1 = list.get(i + 1);
-				if (term1.getName().length() == 2) {
-					// 合并term , term1
+				if (term1.isName() || term1.maxNature == NatureEnum.NULL) {
+					// term 和term1 合并
 					term.merage(term1, NatureEnum.nr);
-					i++;
-				} else if (term1.getName().length() == 1 && i < size - 2) {
-					term2 = list.get(i + 2);
-					if (!hs.contains(term2)) {
-						continue;
-					}
-					if (term2.getName().length() == 1) {
-						// 合并term term1 term2
-						term.merage(term1, NatureEnum.nr).merage(term2, NatureEnum.nr);
-						i += 2;
-					}
+					result.add(term);
+					return result;
 				} else {
-					term.merage(term1, NatureEnum.nr);
-					i++;
+					result.add(term);
+					result.add(term1);
+					return result;
 				}
+			default:
+				term1 = list.get(i + 1);
+				switch (MStatus(term1)) {
+				case 0:
+					result.add(term);
+					break;
+				case 1:
+					// 中间部分找到.判断第三个term
+					term2 = list.get(i + 2);
+					if (isE(term2)) {
+						term.merage(term1, NatureEnum.nr).merage(term2, NatureEnum.nr);
+						result.add(term);
+						i += 2;
+					} else {
+						term.merage(term1, NatureEnum.nr);
+						result.add(term);
+						i++;
+					}
+					break;
+				case 2:
+					term.merage(term1, NatureEnum.nr);
+					result.add(term);
+					i++;
+					break;
+				}
+
+				break;
 			}
-			result.add(term);
+			//
+			// if ( && i < size - 1) {
+			// term1 = list.get(i + 1);
+			// if(term1.getName().equals("侮辱")){
+			// System.out.println(term1.isName());
+			// }
+			// if (term1.isName()&&term1.getName().length()==2) {
+			// // 合并term , term1
+			// term.merage(term1, NatureEnum.nr);
+			// i++;
+			// } else if (term1.getName().length() == 1 && i < size - 2) {
+			// term2 = list.get(i + 2);
+			// if (!term2.isName()) {
+			// term.merage(term1, NatureEnum.nr) ;
+			// i++ ;
+			// continue;
+			// }
+			// if (term2.getName().length() ==
+			// 1&&(term2.isName()||term2.maxNature==NatureEnum.NULL)) {
+			// // 合并term term1 term2
+			// term.merage(term1, NatureEnum.nr).merage(term2, NatureEnum.nr);
+			// i += 2;
+			// }
+			// } else {
+			// term.merage(term1, NatureEnum.nr);
+			// i++;
+			// }
+			// }
 		}
 
 		return result;
+	}
+
+	public static boolean isB(Term term) {
+		return term.maxNature == NatureEnum.nr1;
+	}
+
+	// 0 不是姓名的中间部分
+	// 1 是姓名的中间部分
+	// 2 是姓名的结束部分
+	public static int MStatus(Term term) {
+		if (term.maxNature == NatureEnum.NULL) {
+			return 1;
+		}
+		if (term.isName()) {
+			if (term.getName().length() == 1) {
+				return 1;
+			} else {
+				return 2;
+			}
+		}
+		return 0;
+	}
+
+	public static boolean isE(Term term) {
+		if (term.getName().length() > 1) {
+			return false;
+		}
+		if (term.maxNature == NatureEnum.NULL || term.isName()) {
+			return true;
+		}
+		return false;
 	}
 	// static class Entry {
 	// NatureEnum parrent;

@@ -2,7 +2,7 @@ package org.ansj.domain;
 
 import org.ansj.library.NatureEnum;
 
-public class Term {
+public class Term{
 	// 当前词
 	private String name;
 	// 当前词的起始位置
@@ -144,6 +144,10 @@ public class Term {
 	public void updateOffe(int offe) {
 		// TODO Auto-generated method stub
 		this.offe += offe ;
+	}
+	
+	public boolean isName(){
+		return this.natures.isName ;
 	}
 
 }

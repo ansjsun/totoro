@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.io.StringReader;
 
 import org.ansj.domain.Term;
+import org.ansj.splitWord.Analysis;
 import org.ansj.splitWord.GetWords;
+import org.ansj.splitWord.analysis.ToAnalysis;
+import org.ansj.splitWord.analysis.UserDefinedAnalysis;
 import org.ansj.util.Graph;
 
 public class Test {
@@ -76,27 +79,15 @@ public class Test {
 		for (int mm = 0; mm < 1; mm++) {
 			for (int i = 0; i < strs.length; i++) {
 				if(strs[i]==null)continue ;
-				num+=strs[i].length() ;
-				BufferedReader br = new BufferedReader(new StringReader(strs[i])) ;
-				while((str=br.readLine())!=null){
-//					CopyOfGetWordsImpl gwi = new CopyOfGetWordsImpl();
-					GetWordsImpl gwi = new GetWordsImpl();
-					gwi.setStr(str);
-					String temp= null;
-					Graph gp = new Graph(str) ;
-					while((temp=gwi.allWords())!=null){
-						gp.addTerm(new Term(temp,gwi.offe,gwi.getWeight(),gwi.getNatures(),gwi.getMaxNature())) ;
-					}
-//					gp.print() ;
-					System.out.println(gp.getPath().merger(3).mergerName());;
-//					Term term = gp.optimalRoot() ;
-//					while((term=term.getMaxTo())!=null){
-//						System.out.println(term);
-//					}
+				Analysis udf = new UserDefinedAnalysis(new StringReader(strs[i]),true) ;
+//				Analysis udf = new ToAnalysis(new StringReader(strs[i]),true) ;
+				Term term = null ;
+				while((term=udf.next())!=null){
+					System.out.print(term+" ");
 				}
+				System.out.println();
 			}
 		}
-		System.out.println(System.currentTimeMillis()-start);
 		System.out.println(num);
 		
 	}

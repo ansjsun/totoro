@@ -13,7 +13,7 @@ public final class Natures {
 	public Map<NatureEnum,Integer> natures = new HashMap<NatureEnum,Integer>();
 	public int maxWeight = Integer.MIN_VALUE;
 	public NatureEnum maxNature;
-	
+	public boolean isName ;
 	
 	public Natures(String natureStr){
 		natureStr = natureStr.substring(1,natureStr.length()-1) ;
@@ -26,6 +26,9 @@ public final class Natures {
 			if(weight>maxWeight){
 				maxWeight = weight ;
 				this.maxNature = NatureEnum.valueOf(strs[0].trim()) ;
+			}
+			if(strs[0].contains("nr")||"x".equals(strs[0])){
+					isName = true ;
 			}
 			natures.put(NatureEnum.valueOf(strs[0].trim()), weight) ;
 		}

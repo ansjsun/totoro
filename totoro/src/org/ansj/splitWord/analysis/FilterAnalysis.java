@@ -8,6 +8,11 @@ import org.ansj.domain.Term;
 import org.ansj.splitWord.Analysis;
 import org.ansj.util.filter.StopWord;
 
+/**
+ * 如果对分词结果需要过滤停用词.那么就用这个吧
+ * @author ansj
+ *
+ */
 public class FilterAnalysis  {
 
 	private HashSet<String> hs = new HashSet<String>();

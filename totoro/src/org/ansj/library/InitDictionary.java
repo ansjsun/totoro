@@ -112,6 +112,10 @@ public class InitDictionary {
 			base[num] = Integer.parseInt(strs[2]);
 			check[num] = Integer.parseInt(strs[3]);
 			status[num] = Byte.parseByte(strs[4]);
+			//去掉和这个字的名字可能
+			if(strs[1].equals("和")){
+				strs[5] = strs[5].replace(", nr1=4", "") ;
+			}
 			if(!"null".equals(strs[5])){
 				natures[num] = new Natures(strs[5]) ;
 			}else{

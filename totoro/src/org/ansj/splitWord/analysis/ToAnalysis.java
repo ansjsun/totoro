@@ -18,7 +18,7 @@ import org.ansj.util.StringUtil;
 import org.ansj.util.WordAlert;
 
 /**
- * 这个类是用来断句的
+ * 基本分词+人名识别
  * 
  * @author ansj
  * 
@@ -57,6 +57,7 @@ public class ToAnalysis implements Analysis {
 	 */
 	public ToAnalysis(String str, boolean isNameRe) {
 		br = new BufferedReader(new StringReader(str));
+		this.isNameRe = isNameRe ;
 	}
 
 	/**
