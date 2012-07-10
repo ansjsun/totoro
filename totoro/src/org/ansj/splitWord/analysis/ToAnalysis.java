@@ -172,11 +172,17 @@ public class ToAnalysis implements Analysis {
 				while ((str = gwi.allWords()) != null) {
 					gp.addTerm(new Term(str, gwi.offe, gwi.getWeight(), gwi.getNatures(), gwi.getMaxNature()));
 				}
+				LinkedList<Term> mergerName = null ;
 				if (isNameRe) {
-					terms.addAll(gp.getPath().merger(2).mergerName());
+					mergerName = gp.getPath().merger(3).mergerName() ; ;
+					
 				} else {
-					terms.addAll(gp.getPath().merger(2).getResultLinked());
+					mergerName = gp.getPath().merger(3).getResultLinked();
 				}
+				for (Term term : mergerName) {
+					term.updateOffe(start) ;
+				}
+				terms.addAll(mergerName);
 				if (i < length) {
 					i -= 1;
 				}
@@ -185,4 +191,13 @@ public class ToAnalysis implements Analysis {
 		}
 	}
 
+	public static void main(String[] args) throws IOException {
+		ToAnalysis toAnalysis = new ToAnalysis(new StringReader("java学习笔记是一本好书"),true) ;
+		
+		Term term = null ;
+		
+		while((term=toAnalysis.next())!=null){
+			System.out.println(term.getOffe()+"	"+term); 
+		}
+	}
 }

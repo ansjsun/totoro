@@ -131,41 +131,13 @@ public class NameRecognition {
 
 				break;
 			}
-			//
-			// if ( && i < size - 1) {
-			// term1 = list.get(i + 1);
-			// if(term1.getName().equals("侮辱")){
-			// System.out.println(term1.isName());
-			// }
-			// if (term1.isName()&&term1.getName().length()==2) {
-			// // 合并term , term1
-			// term.merage(term1, NatureEnum.nr);
-			// i++;
-			// } else if (term1.getName().length() == 1 && i < size - 2) {
-			// term2 = list.get(i + 2);
-			// if (!term2.isName()) {
-			// term.merage(term1, NatureEnum.nr) ;
-			// i++ ;
-			// continue;
-			// }
-			// if (term2.getName().length() ==
-			// 1&&(term2.isName()||term2.maxNature==NatureEnum.NULL)) {
-			// // 合并term term1 term2
-			// term.merage(term1, NatureEnum.nr).merage(term2, NatureEnum.nr);
-			// i += 2;
-			// }
-			// } else {
-			// term.merage(term1, NatureEnum.nr);
-			// i++;
-			// }
-			// }
 		}
 
 		return result;
 	}
 
 	public static boolean isB(Term term) {
-		return term.maxNature == NatureEnum.nr1;
+		return term.maxNature == NatureEnum.nr1 ;
 	}
 
 	// 0 不是姓名的中间部分
@@ -175,13 +147,13 @@ public class NameRecognition {
 		if (term.maxNature == NatureEnum.NULL) {
 			return 1;
 		}
-		if (term.isName()) {
-			if (term.getName().length() == 1) {
+//		if (term.isName()) {
+			if (term.maxNature.toString().indexOf('w')>0&&term.getName().length() == 1) {
 				return 1;
-			} else {
+			} else if(term.isName()){
 				return 2;
 			}
-		}
+//		}
 		return 0;
 	}
 

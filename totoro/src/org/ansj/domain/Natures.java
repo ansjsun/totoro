@@ -50,6 +50,10 @@ public final class Natures {
 		if(natures==null) return 0 ;
 		return natures.get(nature);
 	}
+	
+	public boolean contains(NatureEnum nature){
+		return natures.containsKey(nature) ;
+	}
 
 	public int getNatureIndex(Nature nature) {
 		return NatureMap.natrueMap.get(nature);

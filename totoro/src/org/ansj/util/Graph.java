@@ -125,7 +125,7 @@ public class Graph {
 		 */
 		public Merger merger(int yuan) {
 			boolean flag = false;
-			for (int y = 0; y <= yuan; y++) {
+			for (int y = 1; y <= yuan; y++) {
 				if (flag) {
 					updateTerms(y);
 				} else {

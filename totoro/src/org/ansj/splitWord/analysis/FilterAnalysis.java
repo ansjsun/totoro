@@ -13,9 +13,9 @@ import org.ansj.util.filter.StopWord;
  * @author ansj
  *
  */
-public class FilterAnalysis  {
+public class FilterAnalysis implements Analysis  {
 
-	private HashSet<String> hs = new HashSet<String>();
+	private static HashSet<String> hs = null ;
 
 	private Analysis analysis = null ;
 	/**
@@ -28,7 +28,7 @@ public class FilterAnalysis  {
 	 */
 	public FilterAnalysis(Analysis analysis, HashSet<String> hs) {
 		this.analysis = analysis ;
-		this.hs = hs;
+		FilterAnalysis.hs = hs;
 	}
 
 	/**
@@ -39,12 +39,14 @@ public class FilterAnalysis  {
 	 */
 	public FilterAnalysis(Analysis analysis) {
 		this.analysis = analysis ;
-		this.hs = StopWord.getFilterSet();
+		if(hs==null)
+		FilterAnalysis.hs = StopWord.getFilterSet();
 	}
 
 	public Term next() throws IOException {
 		// TODO Auto-generated method stub
 		Term term = analysis.next();
+		if(term==null) return null ;
 		while (hs.contains(term.getName())) {
 			term = analysis.next();
 			if (term == null) {
