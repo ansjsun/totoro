@@ -2,7 +2,7 @@ package love.cq.domain;
 
 
 public class Forest implements WoodInterface {
-	WoodInterface[] chars = new WoodInterface[65535];
+	WoodInterface[] chars = new WoodInterface[65536];
 
 	public WoodInterface add(WoodInterface branch) {
 		WoodInterface temp = chars[branch.getC()] ;
