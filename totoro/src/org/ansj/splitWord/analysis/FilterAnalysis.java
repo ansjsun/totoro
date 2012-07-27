@@ -3,8 +3,11 @@ package org.ansj.splitWord.analysis;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 import org.ansj.domain.Term;
+import org.ansj.library.NatureEnum;
 import org.ansj.splitWord.Analysis;
 import org.ansj.util.filter.StopWord;
 
@@ -56,6 +59,23 @@ public class FilterAnalysis implements Analysis  {
 		return term;
 	}
 
+	/**
+	 * 对一个链表进行过滤
+	 * @param terms
+	 */
+	public static void filter(LinkedList<Term> terms, HashSet hs){
+		if(hs==null)
+			hs = FilterAnalysis.hs = StopWord.getFilterSet();
+		Iterator<Term> it = terms.iterator() ;
+		
+		Term term = null ;
+		while(it.hasNext()){
+			term = it.next() ;
+			if(hs.contains(term.getName())||term.maxNature.toString().contains("w"))
+				it.remove() ;
+		}
+				
+	}
 	
 
 }

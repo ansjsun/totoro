@@ -59,4 +59,8 @@ public final class Natures {
 		return NatureMap.natrueMap.get(nature);
 	}
 	
+	public String toString(){
+		return this.maxNature+"	"+natures ;
+	}
+	
 }

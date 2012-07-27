@@ -137,6 +137,7 @@ public class NameRecognition {
 	}
 
 	public static boolean isB(Term term) {
+//		return term.isName() ;
 		return term.maxNature == NatureEnum.nr1 ;
 	}
 
@@ -148,7 +149,7 @@ public class NameRecognition {
 			return 1;
 		}
 //		if (term.isName()) {
-			if (term.maxNature.toString().indexOf('w')>0&&term.getName().length() == 1) {
+			if (term.getName().length() == 1) {
 				return 1;
 			} else if(term.isName()){
 				return 2;

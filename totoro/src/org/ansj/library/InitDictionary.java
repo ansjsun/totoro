@@ -147,7 +147,46 @@ public class InitDictionary {
 		return status[baseValue]>1;
 	}
 	
+	
+	/**
+	 * 判断一个词返回词性.如果没有则返回null
+	 * @param str
+	 * @return
+	 */
+	public static Natures getWordNature(String str){
+		init() ;
+		if(StringUtil.isBlank(str)){
+			return null ;
+		}
+		int baseValue = str.charAt(0) ;
+		int checkValue = 0 ;
+		for (int i = 1; i < str.length(); i++) {
+			checkValue = baseValue;
+			baseValue = base[baseValue] + str.charAt(i);
+			if (check[baseValue] != -1 && check[baseValue] != checkValue) {
+				return null ;
+			}
+		}
+		if(status[baseValue]>1){
+			return natures[baseValue] ;
+		}else{
+			return null ;
+		}
+	}
+	
 	public static void main(String[] args) {
-		System.out.println(isInSystemDic("中国2"));
+		init() ;
+		StringBuilder sb = new StringBuilder() ;
+		for (int i = 0; i < words.length; i++) {
+			if(natures[i]!=null){
+				if(natures[i].maxNature.toString().contentEquals("v")){
+					sb.append(words[i]+"	"+"0.1f\n") ;
+				}
+				if(natures[i].maxNature.toString().contentEquals("d")){
+					sb.append(words[i]+"	"+"0.5f\n") ;
+				}
+			}
+		}
+		IOUtil.Writer("/Users/ansj/Documents/快盘/分词/v.txt", "UTF-8", sb.toString()) ;
 	}
 }
