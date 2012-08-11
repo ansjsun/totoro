@@ -2,12 +2,12 @@ package org.ansj.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.ansj.domain.Path;
 import org.ansj.domain.Term;
-import org.ansj.library.NatureEnum;
+import org.ansj.domain.TermNature;
 
 /**
  * 最短路径
@@ -17,22 +17,20 @@ import org.ansj.library.NatureEnum;
  */
 public class Graph {
 	private Term[][] terms = null;
-	private Term end = null ;
+	private Term end = null;
 	private Term root = null;
-	private static final String E = "E";
-	private static final String B = "B";
+	private static final String E = "END";
+	private static final String B = "BEGIN";
+	private String str;
 
 	public Graph(String str) {
-		int size = str.length() ;
-		terms = new Term[size + 1][1];
-		end = new Term(E, size, 1, null, NatureEnum.NULL);
-		root = new Term(B, -1, 1, null, NatureEnum.NULL);
-		for (int i = 0; i < size; i++) {
-			terms[i][0] = new Term(str.charAt(i)+"",i,-1,null,NatureEnum.NULL) ;
-		}
-		addTerm(end);
+		this.str = str;
+		int size = str.length();
+		terms = new Term[size + 1][2];
+		end = new Term(E, size, TermNature.END);
+		root = new Term(B, -1, TermNature.BEGIN);
+		terms[size][0] = end;
 	}
-	
 
 	/**
 	 * 构建最优路径
@@ -53,6 +51,7 @@ public class Graph {
 
 	/**
 	 * 验证数组是否需要扩容
+	 * 
 	 * @param elementData
 	 * @param length
 	 * @return
@@ -78,7 +77,7 @@ public class Graph {
 	private StringBuilder sb = new StringBuilder();
 
 	public String toString() {
-		showPath(end);
+		showPath(end.getMaxPath());
 		return sb.toString();
 	}
 
@@ -87,28 +86,23 @@ public class Graph {
 	 * 
 	 * @param term
 	 */
-	private void showPath(Term term) {
-		if (term.getMaxFrom() != null) {
-			showPath(term.getMaxFrom());
+	private void showPath(Path path) {
+		if (path.getFrom() != null) {
+			showPath(path.getFrom());
 		}
-		if (term.getOffe() < terms.length - 1) {
-			sb.append(term.toString());
+		if (path.getTerm().getOffe() < terms.length - 1) {
+			sb.append(path.getTerm().toString());
 		}
 	}
 
 	public void print() {
 		for (int i = 0; i < terms.length; i++) {
-			boolean flag = false;
 			for (int j = 0; j < terms[i].length; j++) {
 				if (terms[i][j] != null)
-					System.out.print(terms[i][j] + ":" + terms[i][j].getWeight() + ":" + terms[i][j].getPathWeight());
-				flag = true;
+					System.out.println(terms[i][j] + ":" + (terms[i][j].getMaxPath() == null ? Double.MAX_EXPONENT : terms[i][j].getMaxPath().getScore()));
 			}
-			if (flag)
-				System.out.println();
 		}
 	}
-
 
 	/**
 	 * 合并term.因为目前的方式不适合长词的区分
@@ -118,96 +112,79 @@ public class Graph {
 	 */
 	public class Merger {
 		/**
-		 * 进行n元语法数据合并
+		 * 寻找最优路径
 		 * 
 		 * @param yuan
 		 * @return
 		 */
-		public Merger merger(int yuan) {
-			boolean flag = false;
-			for (int y = 1; y <= yuan; y++) {
-				if (flag) {
-					updateTerms(y);
-				} else {
-					flag = true;
-				}
-				for (int i = 0; i < terms.length; i++) {
-					for (int j = 0; j < terms[i].length; j++) {
-						if (terms[i][j] != null) {
-							int to = terms[i][j].getTo() + 1;
-							if (to >= terms.length)
-								continue;
-							for (int k = 0; k < terms[to].length; k++) {
-								if (terms[to][k] != null) {
-									terms[to][k].setPathWeight(terms[i][j], y);
-								}
-							}
+		public Merger merger() {
+			// BEGIN先行打分
+			for (int i = 0; i < terms[0].length; i++) {
+				merger1(root, 0);
+			}
+			for (int i = 0; i < terms.length; i++) {
+				for (int j = 0; j < terms[i].length; j++) {
+					if (terms[i][j] != null && terms[i][j].getMaxPath().getFrom() != null) {
+						int to = terms[i][j].getTo() + 1;
+						if (to < terms.length) {
+							merger1(terms[i][j], to);
 						}
+
 					}
 				}
 			}
+			optimalRoot();
 			return this;
+		}
+
+		/**
+		 * 具体的遍历打分方法
+		 * 
+		 * @param i
+		 *            起始位置
+		 * @param j
+		 *            起始属性
+		 * @param to
+		 */
+		private void merger1(Term fromTerm, int to) {
+			boolean flag = true;
+			for (int k = 0; k < terms[to].length; k++) {
+				if (terms[to][k] != null && fromTerm.getMaxPath() != null) {
+					// 关系式to.set(from)
+					terms[to][k].setPathScore(fromTerm);
+					flag = false;
+				}
+			}
+			if (flag) {
+				terms[to][0] = new Term(String.valueOf(str.charAt(to)), to, TermNature.NULL);
+				terms[to][0].setPathScore(fromTerm);
+			}
 		}
 
 		/**
 		 * 将最终结果放到Term数组中
 		 */
 		public List<Term> getResult() {
-			optimalRoot();
 			List<Term> result = new ArrayList<Term>();
-			Term term = root;
-			while ((term = term.getMaxTo()) != end) {
-				result.add(term);
+			Path path = root.getMaxPath();
+			while ((path = path.getTo()) != end.getMaxPath()) {
+				result.add(path.getTerm());
 			}
 			return result;
 		}
 
 		/**
-		 * 将最终结果放到Term数组中
+		 * 将最终结果放到Term数组中,"感觉linkedlist" 没大用先注释看看哪里报错再说
 		 */
-		public LinkedList<Term> getResultLinked() {
-			LinkedList<Term> result = new LinkedList<Term>();
-			Term term = end;
-			while ((term = term.getMaxFrom()) != null) {
-				result.addFirst(term);
-			}
-			return result;
-		}
+		// public LinkedList<Term> getResultList() {
+		// LinkedList<Term> result = new LinkedList<Term>() ;
+		// Term term = root;
+		// while ((term = term.getMaxPath().getTo()) != end) {
+		// result.add(term);
+		// }
+		// return result;
+		// }
 
-		/**
-		 * 进行人名识别
-		 * 
-		 * @return
-		 */
-		public LinkedList<Term> mergerName() {
-			return NameRecognition.recognition(getResult());
-		}
-
-		/**
-		 * 移除中间的可能结果.讲路径重新设置
-		 */
-		private void updateTerms(int yuan) {
-			Term[][] tempTerms = new Term[terms.length][0];
-			Term term = end;
-			int length = 0;
-			int begin = 0;
-			int index = 0;
-			while (term != null) {
-				index = term.getOffe();
-				begin = term.getName().length() - 1;
-				length = terms[index].length;
-				tempTerms[index] = new Term[length];
-				for (int i = begin; i < length; i++) {
-					if (terms[index][i] == null)
-						continue;
-					if (i == begin)
-						term = term.getMaxFrom();
-					terms[index][i].reset(yuan);
-					tempTerms[index][i] = terms[index][i];
-				}
-			}
-			terms = tempTerms;
-		}
 	}
 
 	/**
@@ -216,15 +193,19 @@ public class Graph {
 	 * @return
 	 */
 	private Term optimalRoot() {
-		Term to = end;
-		Term from = null;
-		while ((from = to.getMaxFrom()) != null) {
-			from.setMaxTo(to);
+		Path to = end.getMaxPath();
+		Path from = null;
+		while ((from = to.getFrom()) != null) {
+			setToAndfrom(to, from);
 			to = from;
 		}
-		root.setMaxTo(to);
-		to.setMaxFrom(root);
 		return root;
+	}
+
+	private void setToAndfrom(Path to, Path from) {
+		// TODO Auto-generated method stub
+		from.setTo(to);
+		to.setFrom(from);
 	}
 
 }

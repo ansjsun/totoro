@@ -1,39 +1,39 @@
 package org.ansj.domain;
 
-import org.ansj.library.NatureEnum;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Term{
+import org.ansj.library.NatureLibrary;
+import org.ansj.util.MathUtil;
+
+public class Term {
+	public static final Term NULL = new Term("NULL", 0, TermNature.NULL) ;
 	// 当前词
 	private String name;
 	// 当前词的起始位置
 	private int offe;
-	// 最优的来源路径
-	private Term maxFrom;
-	// 最优的去路径
-	private Term maxTo;
-	// 路径权重
-	private int pathWeight = 0;
-	//当前term的权重
-	private int weight = 0 ;
 	// 词性列表
-	private Natures natures;
-	//最可能词性
-	public NatureEnum maxNature;
+	private Path[] paths = new Path[0];
+	// 最大路径
+	private Path maxPath = Path.NULLPATH;
+	
 
-	public Term(String name, int offe, int weight, Natures natures ,NatureEnum maxNature ) {
+	public Term(String name, int offe, TermNature tn) {
 		super();
 		this.name = name;
 		this.offe = offe;
-		this.weight = weight ;
-		this.pathWeight = weight ;
-		this.maxNature = maxNature ;
-		this.natures = natures==null?Natures.NULL:natures;
+		maxPath = new Path(tn, this);
+		paths = new Path[]{maxPath};
 	}
-	
-	public Term(String name ,int offe ,NatureEnum maxNature){
-		this.name = name ;
-		this.offe = offe ;
-		this.maxNature = maxNature ;
+
+	public Term(String name, int offe, TermNature[] termNatures) {
+		super();
+		this.name = name;
+		this.offe = offe;
+		paths = new Path[termNatures.length] ;
+		for (int i = 0; i < termNatures.length; i++) {
+			paths[i] = new Path(termNatures[i], this);
+		}
 	}
 
 	// 可以到达的位置
@@ -57,97 +57,65 @@ public class Term{
 		this.name = name;
 	}
 
-	public int getWeight(int yuan) {
-		if(this.name.length()>yuan){
-			return weight;
-		}else{
-			return -100 ;
-		}
-	}
-
-	public void setPathWeight(Term term, int yuan) {
-		if(term.offe>0&&term.maxFrom==null){
-			return ;
-		}
-		if (maxFrom == null) {
-			this.pathWeight = term.pathWeight + this.getWeight(yuan);
-			this.maxFrom = term;
-		} else {
-			int score = term.pathWeight + this.getWeight(yuan);
-			if (score >= pathWeight) {
-				this.pathWeight = score;
-				this.maxFrom = term;
+	/**
+	 * 核心构建最优的路径
+	 * 
+	 * @param term
+	 */
+	public void setPathScore(Term from) {
+		double score;
+		// 遍历两个term的所有词性
+		// 维特比进行最优路径的构建
+		int nTwoWordsFreq = NatureLibrary.getTwoWordsFreq(from, this);
+		Path[] fPaths = from.paths;
+		for (Path fPath : fPaths) {
+			for (Path tPath : paths) {
+				score = MathUtil.compuScore(fPath, tPath,nTwoWordsFreq);
+				if (tPath.getFrom() == null) {
+					tPath.setFromAndScore(fPath, score);
+					this.maxPath = tPath;
+					this.maxPath.setScore(score);
+				} else {
+					// 如果当前最大权重比这个小
+					if (tPath.getScore() >= score) {
+						tPath.setFromAndScore(fPath, score);
+						this.maxPath = tPath;
+					}
+				}
 			}
 		}
-
 	}
 
 	public String toString() {
-		return this.name + "/" +this.maxNature+" ";
-	}
-
-	public Term getMaxFrom() {
-		return maxFrom;
-	}
-
-	public void setMaxFrom(Term maxFrom) {
-		this.maxFrom = maxFrom;
-	}
-	
-	public Term getMaxTo() {
-		return maxTo;
-	}
-
-	public void setMaxTo(Term maxTo) {
-		this.maxTo = maxTo;
-	}
-
-	public int getPathWeight() {
-		return pathWeight;
-	}
-
-	public int getWeight() {
-		return weight;
-	}
-
-	public void reset(int yuan) {
-		// TODO Auto-generated method stub
-		this.maxFrom = null ;
-		this.pathWeight = this.getWeight(yuan);
-	}
-
-	public void UpdateOffe(int baseOffe) {
-		// TODO Auto-generated method stub
-		this.offe+=baseOffe ;
-	}
-
-	public Natures getNatures() {
-		return natures;
+		return this.name + "/" + this.maxPath.getNatureStr() + " " + this.maxPath.index;
 	}
 
 	/**
 	 * 进行term合并
+	 * 
 	 * @param term
 	 * @param maxNature
 	 */
-	public Term merage(Term term , NatureEnum maxNature){
-		this.name = this.name+term.getName() ;
-		this.maxTo = term.getMaxTo() ;
-		this.maxNature = maxNature ;
-		return this ;
+	public Term merage(Term term, Path maxPath) {
+		// this.name = this.name+term.getName() ;
+		// this.maxTo = term.getMaxTo() ;
+		// this.maxPath = maxPath ;
+		return this;
 	}
 
 	/**
 	 * 更新偏移量
+	 * 
 	 * @param offe
 	 */
 	public void updateOffe(int offe) {
 		// TODO Auto-generated method stub
-		this.offe += offe ;
-	}
-	
-	public boolean isName(){
-		return this.natures.isName ;
+		this.offe += offe;
 	}
 
+	public Path getMaxPath() {
+		return maxPath;
+	}
+
+	
 }

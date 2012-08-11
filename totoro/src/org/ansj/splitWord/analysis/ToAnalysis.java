@@ -1,16 +1,18 @@
 package org.ansj.splitWord.analysis;
 
-import static org.ansj.library.InitDictionary.natures;
 import static org.ansj.library.InitDictionary.status;
+import static org.ansj.library.InitDictionary.termNatures;
+import static org.ansj.library.InitDictionary.IN_SYSTEM;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.ansj.domain.Term;
-import org.ansj.library.NatureEnum;
+import org.ansj.domain.TermNature;
 import org.ansj.splitWord.Analysis;
 import org.ansj.splitWord.impl.GetWordsImpl;
 import org.ansj.util.Graph;
@@ -36,11 +38,6 @@ public class ToAnalysis implements Analysis {
 	private int tempLength;
 
 	/**
-	 * 是否识别人名
-	 */
-	private boolean isNameRe;
-
-	/**
 	 * 分词的类
 	 */
 	private GetWordsImpl gwi = new GetWordsImpl();
@@ -55,9 +52,8 @@ public class ToAnalysis implements Analysis {
 	 * 
 	 * @param str
 	 */
-	public ToAnalysis(String str, boolean isNameRe) {
+	public ToAnalysis(String str) {
 		br = new BufferedReader(new StringReader(str));
-		this.isNameRe = isNameRe ;
 	}
 
 	/**
@@ -65,9 +61,8 @@ public class ToAnalysis implements Analysis {
 	 * 
 	 * @param reader
 	 */
-	public ToAnalysis(Reader reader, boolean isNameRe) {
+	public ToAnalysis(Reader reader) {
 		br = new BufferedReader(reader);
-		this.isNameRe = isNameRe;
 	}
 
 	private LinkedList<Term> terms = new LinkedList<Term>();
@@ -102,8 +97,9 @@ public class ToAnalysis implements Analysis {
 
 		offe += tempLength;
 
+		System.out.println(terms.size());	
 		analysis(temp);
-
+		
 		if (!terms.isEmpty()) {
 			term = terms.poll();
 			term.updateOffe(offe);
@@ -129,12 +125,7 @@ public class ToAnalysis implements Analysis {
 		for (int i = 0; i < length; i++) {
 			switch (status[temp.charAt(i)]) {
 			case 0:
-				terms.add(new Term(temp.charAt(i) + "", i, NatureEnum.NULL));
-				break;
-			case 3:
-				terms.add(new Term(temp.charAt(i) + "", i, natures[temp.charAt(i)].maxNature));
-				start = i;
-				end = start;
+				terms.add(new Term(temp.charAt(i) + "", i, TermNature.NULL));
 				break;
 			case 4:
 				start = i;
@@ -143,7 +134,7 @@ public class ToAnalysis implements Analysis {
 					end++;
 				}
 				str = WordAlert.alertEnglish(temp, start, end);
-				terms.add(new Term(str, start, NatureEnum.en));
+				terms.add(new Term(str, start, TermNature.EN));
 				i--;
 				break;
 			case 5:
@@ -153,14 +144,22 @@ public class ToAnalysis implements Analysis {
 					end++;
 				}
 				str = WordAlert.alertNumber(temp, start, end);
-				terms.add(new Term(str, start, NatureEnum.nb));
+				terms.add(new Term(str, start, TermNature.NB));
 				i--;
 				break;
+//			case 3:
+//				//非常卑鄙的利用case穿透.拦截标点符号
+//				if(termNatures[temp.charAt(i)].length==1){
+//					terms.add(new Term(temp.charAt(i) + "", i, termNatures[temp.charAt(i)][0]));
+//					start = i;
+//					end = start;
+//					break;
+//				}
 			default:
 				start = i;
 				end = i;
 				c = temp.charAt(start);
-				while (0 < status[c] && status[c] < 4) {
+				while (IN_SYSTEM[c]) {
 					end++;
 					if (++i >= length)
 						break;
@@ -170,19 +169,16 @@ public class ToAnalysis implements Analysis {
 				gwi.setStr(str);
 				Graph gp = new Graph(str);
 				while ((str = gwi.allWords()) != null) {
-					gp.addTerm(new Term(str, gwi.offe, gwi.getWeight(), gwi.getNatures(), gwi.getMaxNature()));
+					gp.addTerm(new Term(str, gwi.offe, gwi.getTermNatures()));
 				}
-				LinkedList<Term> mergerName = null ;
-				if (isNameRe) {
-					mergerName = gp.getPath().merger(3).mergerName() ; ;
-					
-				} else {
-					mergerName = gp.getPath().merger(3).getResultLinked();
+				List<Term> result = gp.getPath().merger().getResult();
+				
+//				gp.print() ;
+				
+				for (Term term : result) {
+					term.updateOffe(start);
 				}
-				for (Term term : mergerName) {
-					term.updateOffe(start) ;
-				}
-				terms.addAll(mergerName);
+				terms.addAll(result);
 				if (i < length) {
 					i -= 1;
 				}
@@ -192,12 +188,18 @@ public class ToAnalysis implements Analysis {
 	}
 
 	public static void main(String[] args) throws IOException {
-		ToAnalysis toAnalysis = new ToAnalysis(new StringReader("java学习笔记是一本好书"),true) ;
-		
-		Term term = null ;
-		
-		while((term=toAnalysis.next())!=null){
-			System.out.println(term.getOffe()+"	"+term); 
+//		String str = "费孝通向人大常委会提交书面报告" ;
+//		String str = "结婚的和尚未结婚的" ;
+//		String str = "生前" ;
+//		String str = "长春市长春药店" ;
+//		String str = "长春市长春药店" ;
+		String str = "T恤" ;
+		Analysis toAnalysis = new ToAnalysis(new StringReader(str));
+
+		Term term = null;
+
+		while ((term = toAnalysis.next()) != null) {
+			System.out.println(term.getOffe() + "	" + term);
 		}
 	}
 }

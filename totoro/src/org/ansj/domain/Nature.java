@@ -1,31 +1,25 @@
-package org.ansj.domain ;
+package org.ansj.domain;
 
-import org.ansj.library.NatureEnum;
-
+/**
+ * 这里面封装了一些基本的词性.
+ * 
+ * @author ansj
+ * 
+ */
 public class Nature {
-	
-	private NatureEnum name ;
-	private int weight ;
+	public final String natureStr;
+	public final int index;
+	public final int natureIndex;
+	public final int allFrequency ;
 
-	public Nature(NatureEnum name, int weight) {
-		this.name = name ;
-		this.weight = weight ;
+	public Nature(String natureStr, int index, int natureIndex , int allFrequency) {
+		this.natureStr = natureStr;
+		this.index = index;
+		this.natureIndex = natureIndex;
+		this.allFrequency = allFrequency ;
 	}
 
-	public NatureEnum getName() {
-		return name;
+	public String toString() {
+		return natureStr + ":" + index + ":" + natureIndex;
 	}
-
-	public void setName(NatureEnum name) {
-		this.name = name;
-	}
-
-	public int getWeight() {
-		return weight;
-	}
-
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
-	
 }

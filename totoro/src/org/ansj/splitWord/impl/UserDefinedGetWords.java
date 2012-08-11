@@ -4,19 +4,31 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.ansj.library.NatureEnum;
-
 import love.cq.domain.Forest;
-import love.cq.domain.Segement;
 import love.cq.domain.WoodInterface;
-import love.cq.library.MakeArrayLibrary;
+import love.cq.library.Library;
+
+import org.ansj.domain.Segement;
+import org.ansj.util.MyStaticValue;
 
 public class UserDefinedGetWords {
 	public static final int MORESTRING = 1;
 	public static final int MOREFILE = 0;
-	private static final Forest FOREST = MakeArrayLibrary.getForest();
+	private static Forest FOREST = null;
 	private char[] chars;
 	private String str;
+
+	/**
+	 * 加载用户词典
+	 */
+	static {
+		try {
+			FOREST = Library.makeForest(MyStaticValue.rb.getString("userLibrary"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * 当前返还单词的偏移量
 	 */
@@ -88,9 +100,9 @@ public class UserDefinedGetWords {
 
 	public List<Segement> getMaxFrontWordList(String content) {
 		if (content == null || content.trim().length() == 0) {
-			return Collections.EMPTY_LIST ;
+			return Collections.EMPTY_LIST;
 		}
-		List<Segement> result = new ArrayList<Segement>() ;
+		List<Segement> result = new ArrayList<Segement>();
 		char[] chars = content.toCharArray();
 		// 正文
 		StringBuilder sb = new StringBuilder();
@@ -107,11 +119,11 @@ public class UserDefinedGetWords {
 			head = head.get(chars[i]);
 			if (head == null) {
 				if (isBack) {
-					if(sb.length()>0){
-						result.add(new Segement(sb.toString(), start-sb.length())) ;
-						sb = new StringBuilder() ;
+					if (sb.length() > 0) {
+						result.add(new Segement(sb.toString(), start - sb.length()));
+						sb = new StringBuilder();
 					}
-					result.add(new Segement(new String(chars, start, end), start,NatureEnum.userDefine)) ; 
+					result.add(new Segement(new String(chars, start, end), start, "userDefine"));
 					start = start + end;
 					i = start - 1;
 					isBack = false;
@@ -133,11 +145,11 @@ public class UserDefinedGetWords {
 				isBack = true;
 				break;
 			case 3:
-				if(sb.length()>0){
-					result.add(new Segement(sb.toString(), start-sb.length())) ;
-					sb = new StringBuilder() ;
+				if (sb.length() > 0) {
+					result.add(new Segement(sb.toString(), start - sb.length()));
+					sb = new StringBuilder();
 				}
-				result.add(new Segement(new String(chars, start, index), start,NatureEnum.userDefine)) ;
+				result.add(new Segement(new String(chars, start, index), start, "userDefine"));
 				start = start + index;
 				index = 0;
 				end = 1;
@@ -149,12 +161,12 @@ public class UserDefinedGetWords {
 
 		if (head != FOREST) {
 			sb.append(chars, start, index);
-			result.add(new Segement(sb.toString(), start)) ;
-			sb = new StringBuilder() ;
+			result.add(new Segement(sb.toString(), start));
+			sb = new StringBuilder();
 		}
-		
-		if(sb.length()>0){
-			result.add(new Segement(sb.toString(), start)) ;
+
+		if (sb.length() > 0) {
+			result.add(new Segement(sb.toString(), start));
 		}
 
 		return result;
@@ -189,7 +201,7 @@ public class UserDefinedGetWords {
 		UserDefinedGetWords word = new UserDefinedGetWords();
 		long start = System.currentTimeMillis();
 
-		System.out.println(word.getMaxFrontWordList("java开发基础是一个手机手机游戏虚拟机下载的好东西"));;
+		System.out.println(word.getMaxFrontWordList("1、不用去搜索了，网上所有的电子版本全部是阉割版和删减版，真正的原文只有这里。包括原著的博客。为什么这里是真全本，不用解释，但请相信绝无第二家。"));
 
 		System.out.println(System.currentTimeMillis() - start);
 		System.out.println(sb);

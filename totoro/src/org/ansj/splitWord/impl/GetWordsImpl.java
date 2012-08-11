@@ -2,13 +2,15 @@ package org.ansj.splitWord.impl;
 
 import static org.ansj.library.InitDictionary.base;
 import static org.ansj.library.InitDictionary.check;
-import static org.ansj.library.InitDictionary.natures;
 import static org.ansj.library.InitDictionary.status;
+import static org.ansj.library.InitDictionary.termNatures;
 import static org.ansj.library.InitDictionary.words;
 
-import org.ansj.domain.Natures;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.ansj.domain.TermNature;
 import org.ansj.library.InitDictionary;
-import org.ansj.library.NatureEnum;
 import org.ansj.splitWord.GetWords;
 
 public class GetWordsImpl implements GetWords {
@@ -17,15 +19,15 @@ public class GetWordsImpl implements GetWords {
 	 * offe : 当前词的偏移量
 	 */
 	public int offe;
-	
+
 	/**
 	 * 构造方法，同时加载词典,传入词语相当于同时调用了setStr() ;
 	 */
 	public GetWordsImpl(String str) {
 		InitDictionary.init();
-		setStr(str) ;
+		setStr(str);
 	}
-	
+
 	/**
 	 * 构造方法，同时加载词典
 	 */
@@ -33,10 +35,11 @@ public class GetWordsImpl implements GetWords {
 		InitDictionary.init();
 	}
 
-	int charsLength = 0 ; 
+	int charsLength = 0;
+
 	public void setStr(String chars) {
 		this.chars = chars;
-		charsLength = chars.length() ;
+		charsLength = chars.length();
 		checkValue = 0;
 	}
 
@@ -48,7 +51,7 @@ public class GetWordsImpl implements GetWords {
 	private int checkValue = 0;
 	private int tempBaseValue = 0;
 	public int i = 0;
-	private String str = null ;
+	private String str = null;
 
 	public String allWords() {
 		for (; i < charsLength; i++) {
@@ -56,15 +59,15 @@ public class GetWordsImpl implements GetWords {
 			end++;
 			switch (getStatement()) {
 			case 0:
-				if(baseValue==chars.charAt(i)){
-					str = ""+chars.charAt(i) ;
-					offe = i ;
-					start  = ++i;
+				if (baseValue == chars.charAt(i)) {
+					str = "" + chars.charAt(i);
+					offe = i;
+					start = ++i;
 					end = 0;
 					baseValue = 0;
-					tempBaseValue = baseValue ;
-					return str ;
-				}else{
+					tempBaseValue = baseValue;
+					return str;
+				} else {
 					i = start;
 					start++;
 					end = 0;
@@ -73,11 +76,11 @@ public class GetWordsImpl implements GetWords {
 				}
 			case 2:
 				i++;
-				offe =  start;
-				tempBaseValue = baseValue ; 
+				offe = start;
+				tempBaseValue = baseValue;
 				return words[tempBaseValue];
 			case 3:
-				offe =  start;
+				offe = start;
 				start++;
 				i = start;
 				end = 0;
@@ -85,7 +88,7 @@ public class GetWordsImpl implements GetWords {
 				baseValue = 0;
 				return words[tempBaseValue];
 			}
-			
+
 		}
 		if (start++ != i) {
 			i = start;
@@ -114,41 +117,25 @@ public class GetWordsImpl implements GetWords {
 	}
 
 
-	/**
-	 * 获得当前词的权重
-	 * @return
-	 */
-	public int getWeight() {
-		// TODO Auto-generated method stub
-		if(natures[tempBaseValue] == null){
-			return -100 ;
-		}
-		return natures[tempBaseValue].maxWeight;
-	}
-
-	/**
-	 * 获得当前词的词性
-	 * @return
-	 */
-	public Natures getNatures() {
-		// TODO Auto-generated method stub
-		if(natures[tempBaseValue] == null){
-			return Natures.NULL ;
-		}
-		return natures[tempBaseValue];
-	}
-	
-	public NatureEnum getMaxNature() {
-		if(natures[tempBaseValue] == null){
-			return Natures.NULL.maxNature ;
-		}
-		return natures[tempBaseValue].maxNature ;
-	}
-
 	public byte getStatus() {
 		// TODO Auto-generated method stub
 		return status[tempBaseValue];
 	}
+
 	
+
+	/**
+	 * 获得当前词的词性
+	 * 
+	 * @return
+	 */
+	public TermNature[] getTermNatures() {
+		// TODO Auto-generated method stub
+		TermNature[] all = termNatures[tempBaseValue];
+		if (all == null || all.length==0) {
+			return TermNature.TERM_NATURE_ARRAY;
+		}
+		return all;
+	}
 
 }
