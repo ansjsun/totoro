@@ -21,7 +21,8 @@ public class ToAnalysisTest {
 			// System.out.println(next.getName() + ":" + next.maxNature);
 			// sb.append(next.getName()+":"+next.maxNature+"/ ") ;
 			// sb.append("\n") ;
-//			System.out.println(next.getName() + ":" + next.getOffe());
+			if(next.getMaxPath().getNatureStr().startsWith("nr")&&next.getName().length()>1)
+			System.out.println(next.getName() + "/"+next.getMaxPath().getNatureStr());
 		}
 		System.out.println(System.currentTimeMillis() - start);
 //		IOUtil.Writer("/Users/ansj/Documents/快盘/冒死.txt", "UTF-8", sb.toString()) ;

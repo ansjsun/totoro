@@ -22,22 +22,12 @@ public class MathUtil {
 	 * @return 分数
 	 */
 	public static double compuScore(Path from, Path to, int nTwoWordsFreq) {
-		int frequency = to.getTermNature().frequency+1;
-		double b = -Math.log(dSmoothingPara * frequency / (MAX_FREQUENCE + 80000) + (1 - dSmoothingPara)
-				* ((1 - dTemp) * nTwoWordsFreq / frequency + dTemp));
-		if (b < 0){
-//			System.out.print(b+"\t");
-//			System.out.println(from.getTerm().getName()+":"+from.getNatureStr()+"\t"+to.getTerm().getName()+":"+to.getNatureStr());
-//			b += to.getTermNature().frequency;
-		}
+		int frequency = to.getTermNature().frequency + 1;
+		double b = -Math.log(dSmoothingPara * frequency / (MAX_FREQUENCE + 80000) + (1 - dSmoothingPara) * ((1 - dTemp) * nTwoWordsFreq / frequency + dTemp));
+//System.out.print(from+"\t"+to+"\t"+compuNatureScore(from,to));
 		
-		b += to.index ;
-//		System.out.println(b);
-		
-//		System.out.println(b);
-		return from.getScore() + b ;
+		return from.getScore() + b + to.index + 1/compuNatureScore(from,to);
 	}
-
 
 	/**
 	 * 从一个词的词性到另一个词的词性的分数,考虑了到路径的词频.两端的词性.相关度越高返回值越大
@@ -49,16 +39,26 @@ public class MathUtil {
 	 * @return 分数
 	 */
 	private static double compuNatureScore(Path from, Path to) {
-		int twoNatureFreq = NatureLibrary.getTwoNatureFreq(from, to);
-		double b = Math.log((0.9 * twoNatureFreq) / (to.getTermNature().frequency + 1) + 0.1 * to.getTermNature().frequency
-				/ (to.getTermNature().nature.allFrequency + 1));
-//		 System.out.println(from.getNatureStr()+"\t"+"\t"+to.getNatureStr()+b);
+		int allFrequency = to.getTerm().frequency ;
+		int frequency = to.getTermNature().frequency + 1;
+		if(frequency<1){
+			allFrequency = 1 ;
+		}
+		if(allFrequency < frequency){
+			allFrequency = frequency ;
+		}
+		double twoNatureFreq = NatureLibrary.getTwoNatureFreq(from, to)+1;
+		double b = (0.9 * twoNatureFreq) / frequency + 0.1 * frequency
+				/ (allFrequency + 1);
 		return b;
 	}
-	
+
 	public static void main(String[] args) {
-		System.out.println((char)(1061971/256));
-		System.out.println((char)(1061971%256));
+		int twoNatureFreq = 1;
+		int frequency = 0;
+		int allFrequency = 1;
+		double b = (0.9 * twoNatureFreq) / (frequency + 1) + 0.1 * frequency / (allFrequency + 1);
+		System.out.println(b);
 	}
 
 }

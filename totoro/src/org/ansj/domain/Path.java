@@ -72,4 +72,13 @@ public class Path {
 		this.score = score;
 	}
 
+	public Path merage(Path to, TermNature termNature) {
+		// TODO Auto-generated method stub
+		this.getTerm().merage(to.getTerm(),this) ;
+		this.setTo(to.getTo());
+		this.getTo().setFrom(this);
+		this.tn = termNature ;
+		return this;
+	}
+
 }

@@ -2,7 +2,6 @@ package org.ansj.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.ansj.domain.Path;
@@ -16,7 +15,7 @@ import org.ansj.domain.TermNature;
  * 
  */
 public class Graph {
-	private String str = null ;
+	private String str = null;
 	private Term[] terms = null;
 	private Term end = null;
 	private Term root = null;
@@ -24,7 +23,7 @@ public class Graph {
 	private static final String B = "BEGIN";
 
 	public Graph(String str) {
-		this.str = str ;
+		this.str = str;
 		int size = str.length();
 		terms = new Term[size + 1];
 		end = new Term(E, size, TermNature.END);
@@ -153,8 +152,8 @@ public class Graph {
 					term.setPathScore(fromTerm);
 					term = term.getNext();
 				}
-			}else{
-				terms[to] = new Term(String.valueOf(str.charAt(to)), to, TermNature.NULL) ;
+			} else {
+				terms[to] = new Term(String.valueOf(str.charAt(to)), to, TermNature.NULL);
 				terms[to].setPathScore(fromTerm);
 			}
 		}
@@ -171,18 +170,6 @@ public class Graph {
 			return result;
 		}
 
-		/**
-		 * 将最终结果放到Term数组中,"感觉linkedlist" 没大用先注释看看哪里报错再说
-		 */
-		// public LinkedList<Term> getResultList() {
-		// LinkedList<Term> result = new LinkedList<Term>() ;
-		// Term term = root;
-		// while ((term = term.getMaxPath().getTo()) != end) {
-		// result.add(term);
-		// }
-		// return result;
-		// }
-
 	}
 
 	/**
@@ -194,18 +181,29 @@ public class Graph {
 		Path to = end.getMaxPath();
 		Path from = null;
 		while ((from = to.getFrom()) != null) {
-			//断开横向链表.节省内存
-			to.getFrom().getTerm().setNext(null) ;
-			setToAndfrom(to, from);
-			to = from;
+			// 断开横向链表.节省内存
+			to.getFrom().getTerm().setNext(null);
+			to = setToAndfrom(to, from);
 		}
 		return root;
 	}
 
-	private void setToAndfrom(Path to, Path from) {
+	private Path setToAndfrom(Path to, Path from) {
 		// TODO Auto-generated method stub
+		//数字合并
+		if (Recognition.num(to, from)) {
+			return from;
+		}
+		
+		//姓名识别
+		if (Recognition.name(to, from)) {
+			return from;
+		}
+
+		
 		from.setTo(to);
 		to.setFrom(from);
+		return from;
 	}
 
 }

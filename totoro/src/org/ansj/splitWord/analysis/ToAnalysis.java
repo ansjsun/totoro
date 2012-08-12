@@ -191,7 +191,7 @@ public class ToAnalysis implements Analysis {
 //		String str = "生前" ;
 //		String str = "长春市长春药店" ;
 //		String str = "长春市长春药店" ;
-		String str = "永无光亮——" ;
+		String str = "维生素C有抗氧化作用" ;
 		Analysis toAnalysis = new ToAnalysis(new StringReader(str));
 
 		Term term = null;

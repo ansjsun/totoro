@@ -23,6 +23,10 @@ public class TwoWordLibrary {
 	private static final char LC = '@' ;
 	
 	public static int getTwoWordFreq(Term from , Term to) {
+		if(from.getMaxPath().getTermNature().frequency==1||
+				to.getMaxPath().getTermNature().frequency==1){
+			return 0 ;
+		}
 		WoodInterface branch = FOREST ;
 		String content = from.getName() ;
 		for (int i = 0; i < content.length(); i++) {
