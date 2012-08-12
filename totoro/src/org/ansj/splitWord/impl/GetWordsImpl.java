@@ -92,6 +92,7 @@ public class GetWordsImpl implements GetWords {
 		}
 		if (start++ != i) {
 			i = start;
+			baseValue = 0 ;
 			return allWords();
 		}
 		start = 0;
@@ -116,13 +117,10 @@ public class GetWordsImpl implements GetWords {
 		return 0;
 	}
 
-
 	public byte getStatus() {
 		// TODO Auto-generated method stub
 		return status[tempBaseValue];
 	}
-
-	
 
 	/**
 	 * 获得当前词的词性
@@ -132,10 +130,25 @@ public class GetWordsImpl implements GetWords {
 	public TermNature[] getTermNatures() {
 		// TODO Auto-generated method stub
 		TermNature[] all = termNatures[tempBaseValue];
-		if (all == null || all.length==0) {
+		if (all == null || all.length == 0) {
 			return TermNature.TERM_NATURE_ARRAY;
 		}
 		return all;
+	}
+
+	public static void main(String[] args) {
+		GetWords gwi = new GetWordsImpl();
+		gwi.setStr("——");
+		String temp = null;
+		while ((temp = gwi.allWords()) != null) {
+			System.out.println(temp+ gwi.getOffe());
+		}
+	}
+
+	@Override
+	public int getOffe() {
+		// TODO Auto-generated method stub
+		return offe;
 	}
 
 }

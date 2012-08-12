@@ -36,4 +36,6 @@ public interface GetWords {
 	 * @param temp 传入的句子
 	 */
 	public void setStr(String temp);
+	
+	public int getOffe() ;
 }

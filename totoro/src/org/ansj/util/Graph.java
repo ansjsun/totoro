@@ -16,20 +16,20 @@ import org.ansj.domain.TermNature;
  * 
  */
 public class Graph {
-	private Term[][] terms = null;
+	private String str = null ;
+	private Term[] terms = null;
 	private Term end = null;
 	private Term root = null;
 	private static final String E = "END";
 	private static final String B = "BEGIN";
-	private String str;
 
 	public Graph(String str) {
-		this.str = str;
+		this.str = str ;
 		int size = str.length();
-		terms = new Term[size + 1][2];
+		terms = new Term[size + 1];
 		end = new Term(E, size, TermNature.END);
 		root = new Term(B, -1, TermNature.BEGIN);
-		terms[size][0] = end;
+		terms[size] = end;
 	}
 
 	/**
@@ -40,13 +40,12 @@ public class Graph {
 	}
 
 	public void addTerm(Term term) {
-		// 如果当前词数组的长度小于字符串大的长度那么扩容
-		int nameLength = term.getName().length();
-		// 进行数组扩容荣
-		terms[term.getOffe()] = growValite(terms[term.getOffe()], nameLength);
 		// 将词放到图的位置
-		terms[term.getOffe()][nameLength - 1] = term;
-
+		if (terms[term.getOffe()] == null) {
+			terms[term.getOffe()] = term;
+		} else {
+			terms[term.getOffe()] = term.setNext(terms[term.getOffe()]);
+		}
 	}
 
 	/**
@@ -96,11 +95,14 @@ public class Graph {
 	}
 
 	public void print() {
+		Term term = null;
 		for (int i = 0; i < terms.length; i++) {
-			for (int j = 0; j < terms[i].length; j++) {
-				if (terms[i][j] != null)
-					System.out.println(terms[i][j] + ":" + (terms[i][j].getMaxPath() == null ? Double.MAX_EXPONENT : terms[i][j].getMaxPath().getScore()));
+			term = terms[i];
+			while (term != null) {
+				System.out.println(term + ":" + (term.getMaxPath() == null ? Double.MAX_EXPONENT : term.getMaxPath().getScore()));
+				term = term.getNext();
 			}
+
 		}
 	}
 
@@ -118,19 +120,15 @@ public class Graph {
 		 * @return
 		 */
 		public Merger merger() {
+			Term term = null;
 			// BEGIN先行打分
-			for (int i = 0; i < terms[0].length; i++) {
-				merger1(root, 0);
-			}
+			merger1(root, 0);
 			for (int i = 0; i < terms.length; i++) {
-				for (int j = 0; j < terms[i].length; j++) {
-					if (terms[i][j] != null && terms[i][j].getMaxPath().getFrom() != null) {
-						int to = terms[i][j].getTo() + 1;
-						if (to < terms.length) {
-							merger1(terms[i][j], to);
-						}
-
-					}
+				term = terms[i];
+				while (term != null && term.getMaxPath().getFrom() != null && term != end) {
+					int to = term.getTo();
+					merger1(term, to);
+					term = term.getNext();
 				}
 			}
 			optimalRoot();
@@ -147,17 +145,17 @@ public class Graph {
 		 * @param to
 		 */
 		private void merger1(Term fromTerm, int to) {
-			boolean flag = true;
-			for (int k = 0; k < terms[to].length; k++) {
-				if (terms[to][k] != null && fromTerm.getMaxPath() != null) {
+			Term term = null;
+			if (terms[to] != null) {
+				term = terms[to];
+				while (term != null) {
 					// 关系式to.set(from)
-					terms[to][k].setPathScore(fromTerm);
-					flag = false;
+					term.setPathScore(fromTerm);
+					term = term.getNext();
 				}
-			}
-			if (flag) {
-				terms[to][0] = new Term(String.valueOf(str.charAt(to)), to, TermNature.NULL);
-				terms[to][0].setPathScore(fromTerm);
+			}else{
+				terms[to] = new Term(String.valueOf(str.charAt(to)), to, TermNature.NULL) ;
+				terms[to].setPathScore(fromTerm);
 			}
 		}
 
@@ -196,6 +194,8 @@ public class Graph {
 		Path to = end.getMaxPath();
 		Path from = null;
 		while ((from = to.getFrom()) != null) {
+			//断开横向链表.节省内存
+			to.getFrom().getTerm().setNext(null) ;
 			setToAndfrom(to, from);
 			to = from;
 		}

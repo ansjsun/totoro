@@ -1,7 +1,5 @@
 package org.ansj.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.ansj.library.NatureLibrary;
 import org.ansj.util.MathUtil;
@@ -16,6 +14,8 @@ public class Term {
 	private Path[] paths = new Path[0];
 	// 最大路径
 	private Path maxPath = Path.NULLPATH;
+	//同一行内数据
+	private Term next ;
 	
 
 	public Term(String name, int offe, TermNature tn) {
@@ -38,7 +38,7 @@ public class Term {
 
 	// 可以到达的位置
 	public int getTo() {
-		return offe + name.length() - 1;
+		return offe + name.length() ;
 	}
 
 	public int getOffe() {
@@ -96,10 +96,10 @@ public class Term {
 	 * @param term
 	 * @param maxNature
 	 */
-	public Term merage(Term term, Path maxPath) {
-		// this.name = this.name+term.getName() ;
-		// this.maxTo = term.getMaxTo() ;
-		// this.maxPath = maxPath ;
+	public Term merage(Term to,TermNature tn) {
+		 this.name = this.name+to.getName() ;
+		 Path path = new Path(tn, this) ;
+		 path.index = this.maxPath.index ; 
 		return this;
 	}
 
@@ -115,6 +115,15 @@ public class Term {
 
 	public Path getMaxPath() {
 		return maxPath;
+	}
+
+	public Term getNext() {
+		return next;
+	}
+
+	public Term setNext(Term next) {
+		this.next = next;
+		return this ;
 	}
 
 	

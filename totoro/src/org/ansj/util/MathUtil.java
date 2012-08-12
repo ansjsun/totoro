@@ -8,7 +8,7 @@ public class MathUtil {
 	// 平滑参数
 	private static final double dSmoothingPara = 0.1;
 	// 一个参数
-	private static final int MAX_FREQUENCE = 2079997;
+	private static final int MAX_FREQUENCE = 20799970;
 	// ﻿Two linked Words frequency
 	private static final double dTemp = (double) 1 / MAX_FREQUENCE;
 
@@ -25,8 +25,16 @@ public class MathUtil {
 		int frequency = to.getTermNature().frequency+1;
 		double b = -Math.log(dSmoothingPara * frequency / (MAX_FREQUENCE + 80000) + (1 - dSmoothingPara)
 				* ((1 - dTemp) * nTwoWordsFreq / frequency + dTemp));
-		if(to.getTerm().getName().length()==1)
-			b = b + ((double)1)/(double)(Math.log(frequency)) ;
+		if (b < 0){
+//			System.out.print(b+"\t");
+//			System.out.println(from.getTerm().getName()+":"+from.getNatureStr()+"\t"+to.getTerm().getName()+":"+to.getNatureStr());
+//			b += to.getTermNature().frequency;
+		}
+		
+		b += to.index ;
+//		System.out.println(b);
+		
+//		System.out.println(b);
 		return from.getScore() + b ;
 	}
 
@@ -46,6 +54,11 @@ public class MathUtil {
 				/ (to.getTermNature().nature.allFrequency + 1));
 //		 System.out.println(from.getNatureStr()+"\t"+"\t"+to.getNatureStr()+b);
 		return b;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println((char)(1061971/256));
+		System.out.println((char)(1061971%256));
 	}
 
 }

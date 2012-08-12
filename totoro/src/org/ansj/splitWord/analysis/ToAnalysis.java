@@ -97,7 +97,6 @@ public class ToAnalysis implements Analysis {
 
 		offe += tempLength;
 
-		System.out.println(terms.size());	
 		analysis(temp);
 		
 		if (!terms.isEmpty()) {
@@ -111,7 +110,7 @@ public class ToAnalysis implements Analysis {
 
 	private void analysis(String temp) {
 		// TODO Auto-generated method stub
-
+		Graph gp = new Graph(temp);
 		int start = 0;
 		int end = 0;
 		int length = 0;
@@ -125,7 +124,7 @@ public class ToAnalysis implements Analysis {
 		for (int i = 0; i < length; i++) {
 			switch (status[temp.charAt(i)]) {
 			case 0:
-				terms.add(new Term(temp.charAt(i) + "", i, TermNature.NULL));
+				gp.addTerm(new Term(temp.charAt(i) + "", i, TermNature.NULL));
 				break;
 			case 4:
 				start = i;
@@ -134,7 +133,7 @@ public class ToAnalysis implements Analysis {
 					end++;
 				}
 				str = WordAlert.alertEnglish(temp, start, end);
-				terms.add(new Term(str, start, TermNature.EN));
+				gp.addTerm(new Term(str, start, TermNature.EN));
 				i--;
 				break;
 			case 5:
@@ -144,7 +143,7 @@ public class ToAnalysis implements Analysis {
 					end++;
 				}
 				str = WordAlert.alertNumber(temp, start, end);
-				terms.add(new Term(str, start, TermNature.NB));
+				gp.addTerm(new Term(str, start, TermNature.NB));
 				i--;
 				break;
 //			case 3:
@@ -166,25 +165,24 @@ public class ToAnalysis implements Analysis {
 					c = temp.charAt(i);
 				}
 				str = temp.substring(start, end);
-				gwi.setStr(str);
-				Graph gp = new Graph(str);
+				gwi.setStr(str) ;
 				while ((str = gwi.allWords()) != null) {
-					gp.addTerm(new Term(str, gwi.offe, gwi.getTermNatures()));
+					gp.addTerm(new Term(str, gwi.offe+start, gwi.getTermNatures()));
 				}
-				List<Term> result = gp.getPath().merger().getResult();
 				
-//				gp.print() ;
-				
-				for (Term term : result) {
-					term.updateOffe(start);
-				}
-				terms.addAll(result);
-				if (i < length) {
+				if(status[c]!=0){
 					i -= 1;
+				}else{
+					gp.addTerm(new Term(String.valueOf(c), i, TermNature.NULL));
 				}
+				
 				break;
 			}
 		}
+		List<Term> result = gp.getPath().merger().getResult();
+		
+		
+		terms.addAll(result);
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -193,7 +191,7 @@ public class ToAnalysis implements Analysis {
 //		String str = "生前" ;
 //		String str = "长春市长春药店" ;
 //		String str = "长春市长春药店" ;
-		String str = "T恤" ;
+		String str = "永无光亮——" ;
 		Analysis toAnalysis = new ToAnalysis(new StringReader(str));
 
 		Term term = null;
